@@ -26,5 +26,8 @@ public class Identificadores {
 
         System.out.println("Está lloviendo? " + estaLloviendo);
         System.out.println("Letra preferida: " + letraPreferida);
+        System.out.println(NUMERO_ALUMNOS);
+        System.out.println(monedero);
+        System.out.println(numEnorme);
     }
 }

@@ -11,14 +11,14 @@ public class EP0217 {
     public static void main(String[] args) {
         int num1, num2;
         boolean correcto = true;
-       
+        Scanner sc = new Scanner(System.in);
+
         while (correcto) {
             Random random = new Random();
             num1 = random.nextInt(99) + 1;
             num2 = random.nextInt(99) + 1;
     
             int resultadoSuma = num1 + num2;
-            Scanner sc = new Scanner(System.in);
             System.out.println("Suma de 2 números");
             System.out.print("Suma " + num1 + " + " + num2 + ": ");
             int resultadoIntroducido = sc.nextInt();
@@ -31,5 +31,6 @@ public class EP0217 {
                 correcto = false;
             }
         }
+        sc.close();
     }
 }
