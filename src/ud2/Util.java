@@ -14,7 +14,10 @@ public class Util {
     static int mayor(int a, int b) {
         return a > b ? a : b;
     }
-
+    static boolean esCasiCero(double n) {
+        return n < 1 && n > 0 ? true : false; 
+    }
+    
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Inserta un número: ");
