@@ -16,7 +16,7 @@ public class E309 {
         numUsuario = sc.nextInt();
         sc.close();
 
-        for (int contador = 0; contador >= 0 & contador <= 10; contador++){
+        for (int contador = 0; contador <= 10; contador++){
             if (numUsuario > 0 & numUsuario <=10) {
                 int resulMultip = numUsuario * contador;
                 System.out.println(numUsuario + " x " + contador + " = " + resulMultip);
