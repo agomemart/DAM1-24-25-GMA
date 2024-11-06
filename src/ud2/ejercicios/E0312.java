@@ -3,7 +3,7 @@ package ud2.ejercicios;
 import java.util.Scanner;
 
 /*Pedir 5 calificaciones y decir si hay algún suspenso */
-public class E312 {
+public class E0312 {
     public static void main(String[] args) {
         int contador = 0;
         double notaAlumno = 0;

@@ -10,14 +10,16 @@ número introducido se encuentra en el rango establecido.
 public class E309 {
     public static void main(String[] args) {
         int numUsuario = 0;
-        int contador = 0;
+        
         Scanner sc = new Scanner(System.in);
-        System.out.println("Inserta un número entre 1 y 10");
+        System.out.print("Inserta un número entre 1 y 10: ");
         numUsuario = sc.nextInt();
+        sc.close();
 
-        for (contador > 0 & contador <= 10; contador++){
+        for (int contador = 0; contador >= 0 & contador <= 10; contador++){
             if (numUsuario > 0 & numUsuario <=10) {
-                System.out.println(numUsuario + " x " + contador + " = ");
+                int resulMultip = numUsuario * contador;
+                System.out.println(numUsuario + " x " + contador + " = " + resulMultip);
             }
         }
     }
