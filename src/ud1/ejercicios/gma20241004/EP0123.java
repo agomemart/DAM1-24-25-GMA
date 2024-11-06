@@ -26,8 +26,8 @@ public class EP0123 {
         System.out.print("Introduce la unidad de medida de origen (K=kg L=lb): ");
         unidadMedida = sc.nextLine().charAt(0);
         /*System.out.print("Introduce la unidad de medida de origen (1=kg 2=lb): ");
-        unidadMedida = sc.nextByte();
-        sc.close();*/
+        unidadMedida = sc.nextByte();*/
+        sc.close();
 
         masaDestino = unidadMedida == 'K' ? masaOrigen * KILOS_LIBRAS : masaOrigen * LIBRAS_KILOS;
         System.out.printf("La masa en la medida de destino es %.3f %s", masaDestino, unidadMedida == 1 ? "libras": "kilos");

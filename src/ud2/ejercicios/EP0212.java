@@ -14,15 +14,15 @@ corresponde. Observa que un número de 8 digitos está dentro del rango del tipo
 public class EP0212 {
    public static void main(String[] args) {
     int nDni, restoModulo;
-    char letraDNI;
-
+    
     Scanner sc = new Scanner(System.in);
     System.out.print("Inserta el número del DNI: ");
     nDni = sc.nextInt();
     sc.close();
-    restoModulo = nDni / 23;
+    restoModulo = nDni % 23;
     
     if (nDni <= 99999999 && nDni >= 10000000) {
+        char letraDNI;
         switch (restoModulo) {
             case 0:
                 letraDNI = 'T';
@@ -88,12 +88,16 @@ public class EP0212 {
                 letraDNI = 'C';
                 break;   
             case 21:
-                letraDNI = 'L';
+                letraDNI = 'K';
                 break;
-            
+            case 22:
+                letraDNI = 'E';
+                break;
             default:
+            letraDNI = ' ';
                 break;
         }
+        System.out.println("Tu DNI con letra sería: "+ nDni + letraDNI);
     } else {
         System.out.println("Número de DNI no válido. Inserta otro número.");
     }
