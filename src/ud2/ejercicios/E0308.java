@@ -5,7 +5,7 @@ import java.util.Scanner;
 /*
  * Pide 10 números por teclado y da la media de todos ellos
  */
-public class E308 {
+public class E0308 {
     public static void main(String[] args) {
         int contador = 0;
         double media = 0;

@@ -7,7 +7,7 @@ import java.util.Scanner;
 10. Hay que mostrar la tabla de multiplicar de dicho número, asegurándose de que el
 número introducido se encuentra en el rango establecido.
  */
-public class E309 {
+public class E0309 {
     public static void main(String[] args) {
         int numUsuario = 0;
         
