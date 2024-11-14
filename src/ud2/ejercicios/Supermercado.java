@@ -23,6 +23,7 @@ public class Supermercado {
     public static double importeTotalProducto(double precio, int ud) {
         return precio * ud;
     }
+
     public static void metodoPago(int menuPago) {
         switch (menuPago) {
             case 1:
@@ -36,69 +37,128 @@ public class Supermercado {
                 break;
         }
     }
+
     public static boolean numDoubleIntroducido(double numIntroducido) {
-        if (numIntroducido <= 0 ) {
+        while (numIntroducido <= 0) {
             System.out.println("Número introducido no válido");
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
+
     public static boolean numIntIntroducido(int numIntroducido) {
-        if (numIntroducido <= 0 ) {
+        while (numIntroducido <= 0) {
             System.out.println("Número introducido no válido");
             return false;
+        }
+        return true;
+    }
+
+    public static void procesarPagoEnEfectivo(double efectivoCliente, double totalCompra) {
+        Scanner sc = new Scanner(System.in);
+        do {
+            if (efectivoCliente < totalCompra) {
+                System.out.print("La cantidad entregada no es suficiente. Introduzca otra cantidad: ");
+                efectivoCliente = sc.nextDouble();
+            }
+        } while (efectivoCliente < totalCompra);
+
+        double cambio = efectivoCliente - totalCompra;
+        if (efectivoCliente == totalCompra) {
+            System.out.println("Pago exacto. No hay cambio");
         } else {
-            return true;
+            System.out.printf("Su cambio es de: %.2f euros \n", cambio);
         }
     }
+
+    public static void desglosarCambio(double cambio) {
+        // Denominaciones disponibles de billetes y monedas
+        int[] denominacionesEuros = { 50, 20, 10, 5, 2, 1 }; // Billetes y monedas de euros
+        int[] denominacionesCentimos = { 50, 20, 10, 5, 2, 1 }; // Monedas de céntimos
+
+        int euros = (int) cambio; // Parte entera en euros
+        int centimos = (int) Math.round((cambio - euros) * 100); // Parte decimal en céntimos
+
+        System.out.println("Desglose de cambio:");
+
+        // Desglosar en euros
+        for (int valor : denominacionesEuros) {
+            int cantidad = euros / valor;
+            if (cantidad > 0) {
+                System.out.printf("%d billetes/monedas de %d€\n", cantidad, valor);
+                euros %= valor; // Actualizar el resto de euros
+            }
+        }
+
+        // Desglosar en céntimos
+        for (int valor : denominacionesCentimos) {
+            int cantidad = centimos / valor;
+            if (cantidad > 0) {
+                System.out.printf("%d monedas de %d céntimos\n", cantidad, valor);
+                centimos %= valor; // Actualizar el resto de céntimos
+            }
+        }
+
+        if (euros == 0 && centimos == 0) {
+            System.out.println("El cambio ha sido completamente desglosado.");
+        }
+    }
+
     public static void main(String[] args) {
-        double precioProducto = 0; 
+        double precioProducto = 0;
         double precioTotal = 0;
         int udPruducto, menuPago;
+        boolean continuarCompra;
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Bienvenido a la caja del supermercado! Introduzca el precio del producto y las unidades. Cuando finalice pulse -1.");
-        while (precioProducto != -1) {
-            System.out.print("Introduce el precio del producto: ");
-            precioProducto = sc.nextDouble();
-            System.out.print("Introduce las unidades del producto: ");
-            udPruducto = sc.nextInt();
+        do {
+            System.out.println(
+                    "Bienvenido a la caja del supermercado! Introduzca el precio del producto y las unidades. Cuando finalice pulse -1.");
+            while (precioProducto != -1) {
+                System.out.print("Introduce el precio del producto: ");
+                precioProducto = sc.nextDouble();
+                System.out.print("Introduce las unidades del producto: ");
+                udPruducto = sc.nextInt();
 
-            if (numDoubleIntroducido(precioProducto) == true && numIntIntroducido(udPruducto) == true) {
-                precioTotal += importeTotalProducto(precioProducto, udPruducto);
-                
-                System.out.printf("Total artículos: %.2f euros \n", precioTotal);
-            } else {
-                System.out.println("Introduzca datos correctos para la próxima :)");
-            }
-        }
+                if (numDoubleIntroducido(precioProducto) == true && numIntIntroducido(udPruducto) == true) {
+                    precioTotal += importeTotalProducto(precioProducto, udPruducto);
 
-        System.out.printf("El total de la compra es de: %.2f euros \n", precioTotal);
-        System.out.print("Como desea pagar: (Pulse 1 para tarjeta y 2 para efectivo: ");
-        menuPago = sc.nextInt();
-
-        if (numIntIntroducido(menuPago) == true) {
-            metodoPago(menuPago);
-            if (menuPago == 2) {
-                System.out.print("Entrega efectivo: ");
-                double efectivoCliente = sc.nextDouble();
-                numDoubleIntroducido(efectivoCliente);
-                if (efectivoCliente < precioTotal) {
-                    System.out.println("La cantidad pagada no es suficiente para pagar toda la compra. Introduzca más efectivo.");
+                    System.out.printf("Total artículos: %.2f euros \n", precioTotal);
                 } else {
-                    System.out.println("Procesando compra...");
-                    double devolucionEfectivo = efectivoCliente - precioTotal;
-                    if (devolucionEfectivo == 0) {
-                        System.out.println("Gracias por su compra! Que tenga un buen dia :)");
-                    } else {
-                        System.out.printf("Su cambio: %.2f euros", devolucionEfectivo);
+                    System.out.println("Por favor, introduzca los datos correctamente :)");
+                }
+
+                System.out.printf("El total de la compra es de: %.2f euros \n", precioTotal);
+
+            }
+            do {
+                System.out.print("Como desea pagar: (Pulse 1 para tarjeta y 2 para efectivo: ");
+                menuPago = sc.nextInt();
+                if (numIntIntroducido(menuPago) == true) {
+                    switch (menuPago) {
+                        case 1:
+                            System.out.println("Ha seleccionado pago con tarjeta");
+                            System.out.println("Gracias por su compra! Hasta pronto!");
+                            break;
+                        case 2:
+                            System.out.println("Ha seleccionado pago con efectivo");
+                            System.out.print("Introduce el importe entregado en efectivo: ");
+                            double efectivoCliente = sc.nextDouble();
+                            procesarPagoEnEfectivo(efectivoCliente, precioTotal);
+                            desglosarCambio(efectivoCliente - precioTotal);
+                            break;
+                        default:
+                            System.out.println("Introduce 1 o 2");
+                            break;
                     }
                 }
-            }
-        } else {
-            System.out.println("Introduzca datos correctos para la próxima :)");
-        }
+
+            } while (menuPago != 1 && menuPago != 2);
+            System.out.print("Desea realizar otra compra? 1 (Si) 2 (No): ");
+            continuarCompra = sc.nextInt() == 1;
+
+        } while (continuarCompra);
+        System.out.println("Gracias por su compra. Que tenga un buen día!");
         sc.close();
     }
 }

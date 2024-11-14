@@ -60,15 +60,15 @@ public class CalculadoraHumana {
 
     public static int preguntar(int operacion) {
         int resultado = 0;
-        int num1 = (int) Math.random() * 10;
-        int num2 = (int) Math.random() * 10;
+        int num1 = (int) (Math.random() * 200) + 1;
+        int num2 = (int) (Math.random() * 200) + 1;
         System.out.println("Resuelve la siguiente operación:");
 
         switch (operacion) {
             case 1:
                 while (num2 > num1) { // Asegurarse de que el número a dividir no sea mayor que el cociente para que
                                       // den números enteros en vez de decimales.
-                    num2 = (int) Math.random() * 10;
+                    num2 = (int) (Math.random() * 200) + 1;
                 }
                 System.out.println(num1 + " / " + num2);
                 if (num2 == 0) {
@@ -97,22 +97,26 @@ public class CalculadoraHumana {
     }
 
     public static void main(String[] args) {
-        int operacion = (int) Math.random() * 4;
-        int respuestaUsuario = 0;
+        final int NUM_MAX_FALLOS = 5;
+        final int NUM_OPERACIONES = 7;
+        int numAciertos = 0;
         int numFallos = 0;
-        int contador = 0;
 
         Scanner sc = new Scanner(System.in);
 
-        int resultado = preguntar(operacion);
-        do {
+        while (numAciertos < NUM_OPERACIONES && numFallos < NUM_MAX_FALLOS) {
+            int operacion = (int) (Math.random() * 4) + 1;
+            int resultado = preguntar(operacion);
+
             System.out.print("Respuesta: ");
-            respuestaUsuario = sc.nextInt();
-            contador++;
-            if (!comprobanteOperación(respuestaUsuario, resultado)) {
+            int respuestaUsuario = sc.nextInt();
+
+            if (comprobanteOperación(respuestaUsuario, resultado)) {
+                numAciertos++;
+            } else {
                 numFallos++;
             }
-        } while (contador == 7 || numFallos == 5);
+        }
 
         System.out.println("El juego ha terminado.");
         sc.close();
