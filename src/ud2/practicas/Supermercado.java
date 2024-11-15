@@ -19,6 +19,7 @@ Una vez finalizada la compra de un cliente el programa solicitará si se desea r
 Implementa el programa utilizando programación modular para descomponer el problema en subproblemas más sencillos implementados con funciones.
 
  */
+
 public class Supermercado {
     public static double importeTotalProducto(double precio, int ud) {
         return precio * ud;
