@@ -13,7 +13,7 @@ public class E0313 {
         Scanner sc = new Scanner(System.in);
         for (int i = 0; i <= 6; i ++) {
             
-            System.out.println("Introduce la nota del alumno: ");
+            System.out.print("Introduce la nota del alumno: ");
             nota = sc.nextInt();
             
             if (nota < 5) {

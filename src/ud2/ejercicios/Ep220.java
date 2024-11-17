@@ -7,7 +7,7 @@ import java.util.Scanner;
 contraseña, y que compruebe si corresponden al usuario “admin” con contraseña “abc123.,”
 indicando como resultado un mensaje apropiado.
 */
-public class Ep220 {
+public class EP220 {
     public static void main(String[] args) {
         String nombreUsuario, contraseñaUsuario;
 
