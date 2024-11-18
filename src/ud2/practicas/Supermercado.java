@@ -73,36 +73,47 @@ public class Supermercado {
     }
 
     public static void desglosarCambio(double cambio) {
-        // Denominaciones disponibles de billetes y monedas
-        int[] denominacionesEuros = { 50, 20, 10, 5, 2, 1 }; // Billetes y monedas de euros
-        int[] denominacionesCentimos = { 50, 20, 10, 5, 2, 1 }; // Monedas de céntimos
-
-        int euros = (int) cambio; // Parte entera en euros
-        int centimos = (int) Math.round((cambio - euros) * 100); // Parte decimal en céntimos
+        int euros = (int) cambio;
+        int centimos = (int) Math.round((cambio - euros) * 100);
 
         System.out.println("Desglose de cambio:");
 
-        // Desglosar en euros
-        for (int valor : denominacionesEuros) {
-            int cantidad = euros / valor;
-            if (cantidad > 0) {
-                System.out.printf("%d billetes/monedas de %d€\n", cantidad, valor);
-                euros %= valor; // Actualizar el resto de euros
-            }
-        }
+        euros = desgloseEuros(euros);
 
-        // Desglosar en céntimos
-        for (int valor : denominacionesCentimos) {
-            int cantidad = centimos / valor;
-            if (cantidad > 0) {
-                System.out.printf("%d monedas de %d céntimos\n", cantidad, valor);
-                centimos %= valor; // Actualizar el resto de céntimos
-            }
-        }
+        centimos = desgloseCentimos(centimos);
 
         if (euros == 0 && centimos == 0) {
             System.out.println("El cambio ha sido completamente desglosado.");
         }
+    }
+
+    private static int desgloseEuros(int euros) {
+        euros = desglosarDenominacion(euros, 50, "billetes de 50€");
+        euros = desglosarDenominacion(euros, 20, "billetes de 20€");
+        euros = desglosarDenominacion(euros, 10, "billetes de 10€");
+        euros = desglosarDenominacion(euros, 5, "billetes de 5€");
+        euros = desglosarDenominacion(euros, 2, "monedas de 2€");
+        euros = desglosarDenominacion(euros, 1, "monedas de 1€");
+        return euros;
+    }
+
+    private static int desgloseCentimos(int centimos) {
+        centimos = desglosarDenominacion(centimos, 50, "monedas de 50 céntimos");
+        centimos = desglosarDenominacion(centimos, 20, "monedas de 20 céntimos");
+        centimos = desglosarDenominacion(centimos, 10, "monedas de 10 céntimos");
+        centimos = desglosarDenominacion(centimos, 5, "monedas de 5 céntimos");
+        centimos = desglosarDenominacion(centimos, 2, "monedas de 2 céntimos");
+        centimos = desglosarDenominacion(centimos, 1, "monedas de 1 céntimo");
+        return centimos;
+    }
+
+    private static int desglosarDenominacion(int cantidad, int denominacion, String descripcion) {
+        int numElementos = cantidad / denominacion;
+        if (numElementos > 0) {
+            System.out.printf("%d %s%n", numElementos, descripcion);
+            cantidad %= denominacion;
+        }
+        return cantidad;
     }
 
     public static void main(String[] args) {
