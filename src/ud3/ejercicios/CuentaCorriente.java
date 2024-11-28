@@ -10,30 +10,43 @@ si existe saldo suficiente.
 ● Mostrar información: muestra la información disponible de la cuenta corriente.
  */
 public class CuentaCorriente {
-    private String dni = "";
-    private String nombreTitular = "";
+    public String dni = "";
+    public String titular = "";
     private double saldo = 0;
+    private static String banco;
+    private Gestor gestor;
 
-    CuentaCorriente(String dni, String nombreTitular) {
-        this.dni = dni;
-        this.nombreTitular = nombreTitular;
-        System.out.println("Cuenta corriente creada correctamente");
+    public Gestor getGestor() {
+        return gestor;
     }
-    CuentaCorriente(String dni, String nombreTitular, int saldo) {
-        this.dni = dni;
-        this.nombreTitular = nombreTitular;
-        this.saldo = saldo;
-        System.out.println("Cuenta corriente creada correctamente");
+    public void setGestor(Gestor gestor) {
+        this.gestor = gestor;
     }
-    CuentaCorriente(String dni, int saldo) {
+    public CuentaCorriente(String dni, String titular) {
+        this.dni = dni;
+        this.titular = titular;
+    }
+    public CuentaCorriente(String dni, String nombreTitular, int saldo) {
+        this.dni = dni;
+        this.titular = nombreTitular;
+        this.saldo = saldo;
+    }
+    public CuentaCorriente(String dni, int saldo) {
         this.dni = dni;
         this.saldo = saldo;
-        System.out.println("Cuenta corriente creada correctamente");
+    }
+
+    public static String getBanco() {
+        return banco;
+    }
+
+    public static void setBanco(String banco) {
+        CuentaCorriente.banco = banco;
     }
 
     public void crearCuenta(String dni, String nombreTitular) {
        this.dni = dni;
-       this.nombreTitular = nombreTitular;
+       this.titular = nombreTitular;
     }
 
     public void sacarDinero(int cantidadRetirada, double saldo) {
@@ -58,11 +71,19 @@ public class CuentaCorriente {
     public void mostrarInformacion() {
         System.out.println("Datos de la cuenta:");
         System.out.println("DNI: " + dni);
-        System.out.println("Titular: " + nombreTitular);
+        System.out.println("Titular: " + titular);
         System.out.println("Saldo: " + saldo);
     }
     public static void main(String[] args) {
-        CuentaCorriente Manolo = new CuentaCorriente("44582365D","Manolo Fernández");
-        System.out.println(Manolo);
+        CuentaCorriente cc = new CuentaCorriente("44582365D","Manolo Fernández", 2000);
+        
+        CuentaCorriente.setBanco("Abanca");
+
+        System.out.println(CuentaCorriente.getBanco());
+        cc.mostrarInformacion();
+
+        Gestor gestor = new Gestor("Gestoria Pepe", "986542145");
+        cc.setGestor(gestor);
+        System.out.println(cc.getGestor().nombre + cc.getGestor().telefono);
     }
 }
