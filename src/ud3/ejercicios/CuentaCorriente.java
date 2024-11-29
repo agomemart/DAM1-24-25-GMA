@@ -68,22 +68,57 @@ public class CuentaCorriente {
         
     }
 
-    public void mostrarInformacion() {
+    public void mostrar() {
         System.out.println("Datos de la cuenta:");
         System.out.println("DNI: " + dni);
         System.out.println("Titular: " + titular);
         System.out.println("Saldo: " + saldo);
+        if (gestor != null) 
+            gestor.mostrar();
     }
     public static void main(String[] args) {
         CuentaCorriente cc = new CuentaCorriente("44582365D","Manolo Fernández", 2000);
-        
+        CuentaCorriente cc2 = new CuentaCorriente("34567234F","Maria López", 1000);
+
         CuentaCorriente.setBanco("Abanca");
 
         System.out.println(CuentaCorriente.getBanco());
-        cc.mostrarInformacion();
-
+        
         Gestor gestor = new Gestor("Gestoria Pepe", "986542145");
         cc.setGestor(gestor);
         System.out.println(cc.getGestor().nombre + cc.getGestor().telefono);
-    }
+        cc.mostrar();
+        cc2.mostrar();
+
+        if (CuentaCorriente.transferencia(cc, cc2, 75)) {
+                    System.out.println("Transferencia realizada");
+                } else {
+                    System.out.println("No hay suficiente saldo");
+                    if (cc.transferir(cc2, 75)) {
+                                            System.out.println("Transfreerncia realizada"); 
+                                        } else {
+                                            System.out.println("No hay suficiente saldo");
+                                        }
+                                    }
+                                }
+                public boolean transferir(CuentaCorriente cc2, double importe) {
+                    boolean transferencia = false;
+                        if (cc2 != null && this.saldo >= importe) {
+                            this.saldo -= importe;
+                            cc2.saldo += importe;
+                            transferencia = true;
+                        }
+                    return transferencia;          
+                }
+                public static boolean transferencia(CuentaCorriente cc, CuentaCorriente cc2, double importe) {
+                boolean transferencia = false;
+                if (cc != null && cc2 != null) {
+                    if (cc.saldo >= importe) {
+                        cc.saldo -= importe;
+                        cc2.saldo += importe;
+                        transferencia = true;
+                    }
+                }
+                return transferencia;
+            }
 }

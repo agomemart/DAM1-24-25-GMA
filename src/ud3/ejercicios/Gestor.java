@@ -11,6 +11,11 @@ public class Gestor {
         this.importeMax = 10000;
     }
 
+    public double getImporteMax() {
+        return importeMax;
+    }
 
-    
+    public void mostrar() {
+        System.out.println(this.nombre + this.telefono + this.importeMax);
+    }
 }

@@ -9,6 +9,15 @@ public class Persona {
     private double estatura = 1.80;
     private final String dni = null;
     public static int contadorPersonas = 0;
+    enum Sexo {HOMBRE, MUJER, NO_BINARIO};
+    private Sexo sexo;
+    DiaDeLaSemana diaPreferido;
+    public Persona() {
+    }
+    public Persona(String nombre, Sexo sexo) {
+        this.nombre = nombre;
+        this.sexo = sexo;
+    }
 
     //Métodos
     public void inicializar(String n, String a1, String a2, int e){                            
