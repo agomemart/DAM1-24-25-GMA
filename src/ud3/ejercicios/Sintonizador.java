@@ -16,35 +16,27 @@ public class Sintonizador {
     }
 
     public void up() {
-        if (frecuencia >= 108) {
+        frecuencia += 0.5;
+        if (frecuencia > 108)
             frecuencia = 80;
-        } else {
-            frecuencia += 0.5;
-        }
+       
         
     }
     public void down() {
-        if (frecuencia == 80) {
+        frecuencia -= 0.5;
+        if (frecuencia < 80)
             frecuencia = 108;
-        } else {
-            frecuencia -= 0.5;
-        }
     }
 
     public void upThin() {
-        if (frecuencia >= 108) {
-            frecuencia = 80;
-        } else {
-            frecuencia += 0.1;
-        }
-        
+        frecuencia += 0.1;
+        if (frecuencia > 108)
+            frecuencia = 80;        
     }
     public void downThin() {
-        if (frecuencia == 80) {
+        frecuencia += 0.1;
+        if (frecuencia < 80)
             frecuencia = 108;
-        } else {
-            frecuencia -= 0.1;
-        }
     }
 
     public void display() {
@@ -55,8 +47,12 @@ public class Sintonizador {
         return frecuencia;
     }
 
-    public void setFrecuencia(double frecuencia) {
-        if (frecuencia >= 80 && frecuencia <= 108) {
+    public void setFrecuencia(double frecuencia)  throws IllegalArgumentException{
+        if (frecuencia < 80) {
+            throw new IllegalArgumentException("La frecuencia no puede ser inferior a 80 MHz");
+        } else if (frecuencia > 108) {
+            throw new IllegalArgumentException("La frecuencia no puede ser superior a 108MHz");
+        } else {
             this.frecuencia = frecuencia;
         }
     }
