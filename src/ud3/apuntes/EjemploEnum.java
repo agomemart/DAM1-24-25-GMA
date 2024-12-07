@@ -11,6 +11,7 @@ public class EjemploEnum {
         Scanner sc = new Scanner(System.in);
         System.out.print("Que dia de la semana es hoy? ");
         hoy = DiaDeLaSemana.valueOf(sc.nextLine().toUpperCase());
+        sc.close();
 
         if (hoy == DiaDeLaSemana.VIERNES) {
             System.out.println("Por fin es viernes!!");
@@ -18,5 +19,7 @@ public class EjemploEnum {
 
         Persona p = new Persona("Pepe", Sexo.HOMBRE);
         Persona pp = new Persona("Maria", Sexo.MUJER);
+        System.out.println(p);
+        System.out.println(pp);
     }
 }

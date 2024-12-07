@@ -17,6 +17,7 @@ public class E0708 {
         miRadio.display();
 
         Sintonizador miRadiioError = new Sintonizador(10);
+        System.out.println(miRadiioError);
     }
     @Test
     public void testSintonizador() {
