@@ -50,4 +50,13 @@ public class Persona {
     public static void incrementarContador() {
         contadorPersonas++;
     }
+    public String getDni() {
+        return dni;
+    }
+    public Sexo getSexo() {
+        return sexo;
+    }
+    public double getEstatura() {
+        return estatura;
+    }
 }
