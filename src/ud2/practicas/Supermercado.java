@@ -70,6 +70,7 @@ public class Supermercado {
         } else {
             System.out.printf("Su cambio es de: %.2f euros \n", cambio);
         }
+        sc.close();
     }
 
     public static void desglosarCambio(double cambio) {
