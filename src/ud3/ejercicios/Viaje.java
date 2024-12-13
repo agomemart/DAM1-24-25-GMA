@@ -68,7 +68,7 @@ public class Viaje {
 
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         return getFechaSalida().format(formatter) + " - " + username + " - " + origen + " >> " + destino;
     }
     public static void main(String[] args) {
