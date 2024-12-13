@@ -68,11 +68,13 @@ public class Viaje {
 
     @Override
     public String toString() {
-        return fechaSalida + " - " + username + " - " + origen + " >> " + destino;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy - HH:mm");
+        return getFechaSalida().format(formatter) + " - " + username + " - " + origen + " >> " + destino;
     }
     public static void main(String[] args) {
         User u1 = new User("prueba");
         Viaje v1 = new Viaje(LocalDateTime.of(2024, 12, 15, 20, 0, 0), u1, "Madrid", "Barcelona", 3);
        v1.mostrar();
+       System.out.println(v1.toString());
     }
 }
