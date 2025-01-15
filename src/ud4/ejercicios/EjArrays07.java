@@ -19,7 +19,8 @@ public class EjArrays07 {
         System.out.println("Inserta una altura: ");
         altura = sc.nextDouble();
         sc.close();
-
+        System.out.println(contadorInfer);
+        System.out.println(contadorSuper);
         for(int i = 0; i < t.length; i++) {
             altura += sumaAltura;
         }
