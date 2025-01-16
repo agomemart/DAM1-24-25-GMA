@@ -24,11 +24,9 @@ static String fraseAleatoria(String[] t)
  */
 public class ConceptosProgramacion {
     static String fraseAleatoria(String[] t) {
-        String conceptos[] = {"Algoritmo", "Lenguaje de programación", "Entorno de desarrollo", "Compilación", "Ejecución", 
-        "Código fuente", "Bytecode", "Código objeto"};
         Random rnd = new Random();
-        int posicionAleatoria = rnd.nextInt(0, conceptos.length);
-        return conceptos[posicionAleatoria];
+        int posicionAleatoria = rnd.nextInt(0, t.length);
+        return t[posicionAleatoria];
     }
     public static void main(String[] args) {
         String conceptos[] = {"Algoritmo", "Lenguaje de programación", "Entorno de desarrollo", "Compilación", "Ejecución", 
