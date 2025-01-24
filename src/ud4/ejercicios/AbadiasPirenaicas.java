@@ -1,5 +1,6 @@
 package ud4.ejercicios;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -27,36 +28,43 @@ cordillera montañosa y adicionalmente el listado de índices de montañas en la
 construir (comenzando en 1 para la montaña situada más al Oeste).
 * */
 public class AbadiasPirenaicas {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int[] alturasMontaña = new int[0];
-        int montañaMayor = 0;
-        int alturaMontaña = 0;
-        int contador = 0;
+    static int[] getMontañasAbadias(int[] t) {
+        int[] abadias = new int[0];
+        int maxAltitud = -1;
 
-        //Inserción de datos
-        do {
-            System.out.print("Introduce la altura de las montañas de oeste a este: ");
-            alturaMontaña = sc.nextInt();
-            alturasMontaña[contador] = alturaMontaña;
-            contador++;
-            if (alturaMontaña <= 0) {
-                break;
-            }
-        } while(alturaMontaña <= 0 || contador == 999);
-
-        //Cálculo montañas más altas del derecha a izquierda
-        for (int i = alturasMontaña.length; i > 0 ; i--) {
-            if (alturasMontaña[alturasMontaña.length] > alturasMontaña[alturasMontaña.length - 1]) {
-                montañaMayor = alturasMontaña[alturasMontaña.length];
-            } else {
-                montañaMayor = alturasMontaña[i + 1];
+        for (int i = t.length - 1; i >= 0; i--) {
+            if (t[i] > maxAltitud) {
+                maxAltitud = t[i];
+                abadias = Arrays.copyOf(abadias, abadias.length + 1);
+                abadias[abadias.length - 1] = i + 1;
             }
         }
+        Arrays.sort(abadias);
+        return abadias;
+    }
 
-        //Muestro montaña más alta
-        System.out.println("La montaña más alta en la que se pueden construir abadias es: " + montañaMayor);
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        final int MAX_MONTAÑAS = 1000;
+        int[] altitudes = new int[0];
 
+        //Lectura anticipada
+        System.out.print("Introduce la altura de las montañas de oeste a este: ");
+        int alturaMontaña = sc.nextInt();
 
+        while (alturaMontaña >= 0 && altitudes.length < MAX_MONTAÑAS) {
+            altitudes = Arrays.copyOf(altitudes, altitudes.length + 1);
+            altitudes[altitudes.length - 1] = alturaMontaña;
+            //Lectura repetida
+            alturaMontaña = sc.nextInt();
+        }
+
+        System.out.println(Arrays.toString(altitudes));
+        if (altitudes.length > 0) {
+            int[] abadias = getMontañasAbadias(altitudes);
+            System.out.println("Se pueden construir " + abadias.length + " abadias en la cordillera.");
+        } else{
+            System.out.println("No hay montañas");
+        }
     }
 }
