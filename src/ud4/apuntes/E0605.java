@@ -7,18 +7,17 @@ import java.util.Scanner;
 invertida. Por ejemplo: la cadena “Hola mundo” se devolvería como “odnum aloH”.
  */
 public class E0605 {
-    static String invertirCadena(String cad) {
-        String cadenaInversa;
-        for (int i = cad.length(); i < 0; i--) {
-            //cadenaInversa = cad.concat(charAt(i));
+    static String invertirCadena(String frase) {
+        String fraseInvertida = "";
+        for (int i = frase.length() - 1; i >= 0; i--) {
+            fraseInvertida += frase.charAt(i);
         }
-        return null;
+        return fraseInvertida;
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Inserta una frase: ");
         String frase = sc.nextLine();
-
-        System.out.println("La frase invertida sería: ");
+        System.out.println("La frase invertida sería: " + invertirCadena(frase));
     }
 }
