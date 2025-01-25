@@ -19,6 +19,7 @@ public class E0606 {
         Scanner sc = new Scanner(System.in);
         System.out.println("Introduzca un nombre: ");
         String nombre = sc.nextLine();
+        sc.close();
 
         System.out.println(sinVocales(nombre));
     }

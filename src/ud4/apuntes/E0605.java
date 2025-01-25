@@ -18,6 +18,7 @@ public class E0605 {
         Scanner sc = new Scanner(System.in);
         System.out.print("Inserta una frase: ");
         String frase = sc.nextLine();
+        sc.close();
         System.out.println("La frase invertida sería: " + invertirCadena(frase));
     }
 }
