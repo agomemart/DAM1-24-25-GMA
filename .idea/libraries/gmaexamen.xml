@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="gmaexamen">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/ud3/gmaexamen/gmaexamen.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
