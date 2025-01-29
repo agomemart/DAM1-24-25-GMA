@@ -58,7 +58,8 @@ public class AbadiasPirenaicas {
             //Lectura repetida
             alturaMontaña = sc.nextInt();
         }
-
+        sc.close();
+        
         System.out.println(Arrays.toString(altitudes));
         if (altitudes.length > 0) {
             int[] abadias = getMontañasAbadias(altitudes);
