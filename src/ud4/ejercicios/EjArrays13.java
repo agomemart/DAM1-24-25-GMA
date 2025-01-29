@@ -8,16 +8,37 @@ si la matriz de números enteros que se le pasa como parámetro es una matriz di
 cualquier otro caso
  */
 public class EjArrays13 {
-    boolean esDiagonal(int[][] t) {
-        for (int i = 0; i < t.length; i++) {
-            for (int j = 0; j < t.length; j++) {
-                if (t[i][j] == 0) {
-                    return true;
-                } else if (t[t.length][t.length] == 0){
-                    return true;
+    static boolean esDiagonal(int[][] t) {
+        int filas = t.length;
+        int columnas = t[0].length;
+
+        if (filas != columnas) {
+            return false;
+        }
+
+        for (int i = 0; i < filas; i++) {
+            for (int j = 0; j < columnas; j++) {
+                if (i != j && t[i][j] != 0) {
+                    return false;
                 }
             }
         }
-        return false;
+        return true;
+    }
+    public static void main(String[] args) {
+        int[][] matriz1 = {
+                {3, 0, 0},
+                {0, 5, 0},
+                {0, 0, 9}
+        };
+
+        int[][] matriz2 = {
+                {1, 2, 0},
+                {0, 4, 0},
+                {0, 0, 5}
+        };
+
+        System.out.println("Matriz 1: " + esDiagonal(matriz1)); // true
+        System.out.println("Matriz 2: " + esDiagonal(matriz2)); // false
     }
 }
