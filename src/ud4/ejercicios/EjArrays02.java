@@ -22,8 +22,8 @@ public class EjArrays02 {
                 totalNotas += t[i];
                 notasPares++;
             }
-
         }
+        sc.close();
 
         media = (double)totalNotas / notasPares;
         System.out.println("La media es: " + media);

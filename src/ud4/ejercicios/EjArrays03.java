@@ -21,6 +21,8 @@ public class EjArrays03 {
             t[i] = sc.nextInt();
             totalNotas += t[i];
         }
+        sc.close();
+        
         media = (double) totalNotas / t.length;
 
         for (int j : t) {
