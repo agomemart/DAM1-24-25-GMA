@@ -87,7 +87,7 @@ public class Matriculas {
         System.out.println("Siguiente matricula1: " + siguienteMatricula(matricula2));
 
         comparaMatriculas(matricula1, matricula2);
-        System.out.println("Comparar matriculas: " + comparaMatriculas(matricula3, matricula1));
+        //System.out.println("Comparar matriculas: " + comparaMatriculas(matricula3, matricula1));
     }
 
 
