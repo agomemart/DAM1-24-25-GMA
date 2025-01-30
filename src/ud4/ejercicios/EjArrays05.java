@@ -1,5 +1,7 @@
 package ud4.ejercicios;
-
+/*
+* Contar el número de elementos positivos, negativos y ceros en un array de 10 enteros.
+* */
 import java.util.Arrays;
 import java.util.Random;
 
