@@ -6,73 +6,73 @@ import static java.lang.Character.isLetter;
 
 public class Matriculas {
     static boolean esLetraValida(char ch) {
-        return isLetter(ch);
+        ch = Character.toUpperCase(ch);
+        return "BCDFGHJKLMNPRSTVWXYZ".indexOf(ch) != -1;
     }
 
     static boolean esMatriculaValida(String matricula) {
         final int LONG_MATRICULA = 7;
-        if (matricula.length() != LONG_MATRICULA) {
+        if (matricula == null || matricula.length() != LONG_MATRICULA) {
             return false;
         }
-        char[] t = new char[LONG_MATRICULA];
         for (int i = 0; i < matricula.length(); i++) {
-            t[i] = matricula.charAt(i);
+            if (!Character.isDigit(matricula.charAt(i))) {
+                return false;
+            }
         }
-        if (Character.isDigit(t[0]) && Character.isDigit(t[1]) && Character.isDigit(t[2]) && Character.isDigit(t[3])) {
-            return isLetter(t[4]) && isLetter(t[5]) && isLetter(t[6]);
-        } else {
-            return false;
+        for (int i = 5; i < matricula.charAt(i); i++) {
+            if (!esLetraValida(matricula.charAt(i))) {
+                return false;
+            }
         }
+        return true;
     }
 
     static String siguienteMatricula(String matricula) {
-        final int LONG_MATRICULA = 7;
-        char[] t = new char[LONG_MATRICULA];
-        if (esMatriculaValida(matricula)) {
-            for (int i = 0; i < matricula.length(); i++) {
-                t[i] = matricula.charAt(i);
-            }
-            if (t[3] == 9) {
-                t[2]++;
-                if (t[2] == 9) {
-                    t[1]++;
-                    if (t[1] == 9) {
-                        t[0]++;
-                        if (t[0] == 9) {
-                            t[6]++;
-                            if (t[6] == 'z') {
-                                t[5]++;
-                                if (t[5] == 'z') {
-                                    t[4]++;
-                                } else {
-                                    t[5]++;
-                                }
-                            } else {
-                                t[6]++;
-                            }
-                        } else {
-                            t[1]++;
-                        }
-                    } else {
-                        t[2]++;
-                    }
+        boolean meLlevoUno = false;
+        Integer nuevoNum = Integer.valueOf(matricula.substring(0, 4)) + 1;
+        if (nuevoNum == 10000) {
+            nuevoNum = 0000;
+            meLlevoUno = true;
+        }
+        String numeros = String.format("%04d", nuevoNum);
+
+        char[] letras = matricula.substring(4, 7).toCharArray();
+
+        for (int i = 2; i >= 0 ; i--) {
+            if (meLlevoUno) {
+                String letrasValidas = "BCDFGHJKLMNPRSTVWXYZ";
+                //incrementarLetra
+                if (letras[i] == 'Z') {
+                    letras[i] = 'B';
                 } else {
-                    t[3]++;
+                    letras[i] = letrasValidas.charAt(letrasValidas.indexOf(letras[i]) + 1);
+                    meLlevoUno = false;
                 }
             }
         }
-            return Arrays.toString(t);
+            return numeros + String.valueOf(letras);
         }
 
     static int comparaMatriculas(String m1, String m2) {
-        int coincidencias = 0;
-        int repeticiones = Math.min(m1.length(), m2.length());
-        for (int i = 0; i < repeticiones; i++) {
-            if (m1.charAt(i) == m2.charAt(i)) {
-                coincidencias++;
+        m1 = m1.toUpperCase();
+        m2 = m2.toUpperCase();
+        if (m1.substring(4, 7).compareTo(m2.substring(4, 7)) < 0){
+            //m1 es mas antiguo
+            return -1;
+        } else if (m1.substring(4, 7).compareTo(m2.substring(4, 7)) > 0){
+            //m2 es mas antigua
+            return 1;
+        } else {
+            //letras iguales -> desempatamos con los números
+            if (m1.substring(0, 4).compareTo(m2.substring(0, 4)) < 0) {
+                return -1;
+            } else if (m1.substring(0, 4).compareTo(m2.substring(0, 4)) > 0) {
+                return 1;
+            } else {
+                return 0;
             }
         }
-        return coincidencias;
     }
 
     public static void main(String[] args) {
@@ -84,10 +84,10 @@ public class Matriculas {
         System.out.println("Matricula2:" + esMatriculaValida(matricula2));
 
         System.out.println("Siguiente matricula1: " + siguienteMatricula(matricula1));
-        System.out.println("Siguiente matricula1: " + siguienteMatricula(matricula2));
+        System.out.println("Siguiente matricula3: " + siguienteMatricula(matricula3));
 
         comparaMatriculas(matricula1, matricula2);
-        //System.out.println("Comparar matriculas: " + comparaMatriculas(matricula3, matricula1));
+        System.out.println("Comparar matriculas: " + comparaMatriculas(matricula3, matricula1));
     }
 
 
