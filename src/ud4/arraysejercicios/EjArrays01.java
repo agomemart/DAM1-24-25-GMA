@@ -1,4 +1,4 @@
-package ud4.ejercicios;
+package ud4.arraysejercicios;
 /*
 * Calcular la media de una serie de números que se leen por teclado
 * */

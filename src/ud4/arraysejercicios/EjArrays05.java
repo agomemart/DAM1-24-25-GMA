@@ -1,4 +1,4 @@
-package ud4.ejercicios;
+package ud4.arraysejercicios;
 /*
 * Contar el número de elementos positivos, negativos y ceros en un array de 10 enteros.
 * */

@@ -1,4 +1,4 @@
-package ud4.ejercicios;
+package ud4.arraysejercicios;
 /*
 * Crea una función que determine si una matriz dada es una matriz identidad
 * */

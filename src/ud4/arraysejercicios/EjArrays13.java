@@ -1,4 +1,4 @@
-package ud4.ejercicios;
+package ud4.arraysejercicios;
 
 import org.junit.jupiter.api.Test;/*
  * Una matriz diagonal es una matriz cuadrada cuyos elementos fuera de la diagonal

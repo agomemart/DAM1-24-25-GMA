@@ -12,7 +12,7 @@ personas verbales.
 public class ConjugarVerbos {
     static String[] conjugarPresente(String verbo) {
         String[] terminaciones1 = {"o", "as", "a", "amos", "ais", "an"};
-        String[] terminaciones2 = {"o", "es", "e", "mos", "éis", "en"};
+        String[] terminaciones2 = {"o", "es", "e", "emos", "éis", "en"};
         String[] terminaciones3 = {"o", "es", "e", "imos", "ís", "en"};
 
         String verboConjugar = verbo.substring(0, verbo.length() - 2);
@@ -37,7 +37,7 @@ public class ConjugarVerbos {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Inserta un verbo: ");
+        System.out.print("Inserta un verbo: ");
         String verbo = sc.nextLine();
 
         System.out.println(Arrays.toString(conjugarPresente(verbo)));

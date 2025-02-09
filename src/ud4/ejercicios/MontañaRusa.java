@@ -16,17 +16,14 @@ picos.
 public class MontañaRusa {
     static int contarPicos(int[] alturas) {
         int picos = 0;
+
         for (int i = 0; i < alturas.length; i++) {
-            if (!(i - 1 < 0) && i + 1 < alturas.length) {
-                if (alturas[0] > alturas[1]) {
-                    picos++;
-                }
-                if (alturas[0] == alturas[alturas.length - 1]) {
-                    picos = 0;
-                }
-                if (alturas[i] > alturas[i - 1] && alturas[i] > alturas[i + 1]) {
-                    picos++;
-                }
+            int anterior = alturas[(i - 1 + alturas.length) % alturas.length];
+            int actual = alturas[i];
+            int siguiente = alturas[(i + 1) % alturas.length];
+
+            if (actual > anterior && actual > siguiente) {
+                picos++;
             }
         }
         return picos;
