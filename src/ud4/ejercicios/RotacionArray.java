@@ -9,14 +9,21 @@ import java.util.Arrays;
 * */
 public class RotacionArray {
     public static void rotarArrayDerecha(int[] array, int n) {
+        n = n % array.length;
         int[]arrayResultante = new int[array.length];
-        for (int i = 0; i < array.length; i++) {
-            if (i > n) {
-                arrayResultante[i] = array[n % array.length];
-            } else {
-                arrayResultante[i] = array[i + n];
-            }
+
+        if (n == 0) {
+            System.out.println(Arrays.toString(array));
         }
+
+        for (int i = 0; i < n; i++) {
+            arrayResultante[i] = array[array.length - n + i];
+        }
+
+        for (int i = n; i < array.length; i++) {
+            arrayResultante[i] = array[i - n];
+        }
+
         System.out.println(Arrays.toString(arrayResultante));
     }
 
