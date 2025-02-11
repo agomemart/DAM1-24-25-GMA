@@ -1,5 +1,9 @@
 package ud4.apuntes;
-
+/*
+* Escribir un programa que pida el nombre completo al usuario y lo muestre sin
+vocales (mayúsculas, minúsculas y acentuadas). Por ejemplo, “Álvaro Pérez” quedaría
+como “lvr Prz”
+* */
 import java.util.Scanner;
 
 public class E0606 {

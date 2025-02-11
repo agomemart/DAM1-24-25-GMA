@@ -1,5 +1,16 @@
 package ud4.apuntes;
-
+/*
+* Diseñar un algoritmo que lea del teclado una frase e indique, para cada letra que
+aparece en la frase, cuántas veces se repite. Se consideran iguales las letras mayúsculas
+y las minúsculas para realizar la cuenta. Un ejemplo sería:
+Frase: En un lugar de La Mancha.
+Resultado:
+a: 4 veces
+c: 1 vez
+d: 1 vez
+e: 2 veces
+...
+* */
 public class E0613 {
     public static void main(String[] args) {
         String frase = "En un nlugar de La mancha.";

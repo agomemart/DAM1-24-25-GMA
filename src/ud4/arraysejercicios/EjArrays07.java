@@ -5,34 +5,36 @@ import java.util.Scanner;
 /* Leer N alturas y calcular la altura media. Calcular cuántas hay superiores a la media y cuántas inferiores.*/
 public class EjArrays07 {
     public static void main(String[] args) {
-        int numAlturas = 0;
-        double altura = 0;
-        double sumaAltura = 0;
-        int contadorSuper = 0;
-        int contadorInfer = 0;
-
         Scanner sc = new Scanner(System.in);
-        System.out.print("Cuantas alturas quieres introducir: ");
-        numAlturas = sc.nextInt();
 
-        int[] t = new int[numAlturas];
-        System.out.println("Inserta una altura: ");
-        altura = sc.nextDouble();
-        sc.close();
-        System.out.println(contadorInfer);
-        System.out.println(contadorSuper);
-        for(int i = 0; i < t.length; i++) {
-            altura += sumaAltura;
+        System.out.print("Cuántas alturas quieres introducir: ");
+        int numAlturas = sc.nextInt();
+
+        double[] alturas = new double[numAlturas];
+        double sumaAltura = 0;
+        int contadorSuper = 0, contadorInfer = 0;
+
+        for (int i = 0; i < numAlturas; i++) {
+            System.out.print("Inserta una altura: ");
+            alturas[i] = sc.nextDouble();
+            sumaAltura += alturas[i];
         }
 
-        double mediaAltura = sumaAltura / numAlturas;
+        sc.close();
 
-        for(int i = 0; i < t.length; i++) {
-            if (altura > mediaAltura) {
+        double mediaAltura = sumaAltura / numAlturas;
+        System.out.println("\nAltura media: " + mediaAltura);
+
+        for (int i = 0; i < numAlturas; i++) {
+            if (alturas[i] > mediaAltura) {
                 contadorSuper++;
-            } else if (altura > mediaAltura) {
+            } else if (alturas[i] < mediaAltura) {
                 contadorInfer++;
             }
         }
+
+        // Imprimir resultados
+        System.out.println("Alturas superiores a la media: " + contadorSuper);
+        System.out.println("Alturas inferiores a la media: " + contadorInfer);
     }
 }

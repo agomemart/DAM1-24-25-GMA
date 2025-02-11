@@ -1,5 +1,7 @@
 package ud4.arraysejercicios;
-
+/*
+* Crea una función que calcule la suma de dos matrices.
+* */
 import java.util.Arrays;
 
 public class EjArrays15 {

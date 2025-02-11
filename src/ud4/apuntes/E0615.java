@@ -1,5 +1,9 @@
 package ud4.apuntes;
-
+/*
+* Modificar la Actividad E0614 para que el programa indique al jugador 2 cuántas
+letras coinciden (son iguales y están en la misma posición) entre el texto introducido por
+él y el original.
+* */
 import java.util.Random;
 import java.util.Scanner;
 

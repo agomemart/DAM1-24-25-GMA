@@ -1,5 +1,7 @@
 package ud4.apuntes;
-
+/*
+* Realizar un programa que codifique un texto
+* */
 import java.util.Scanner;
 
 public class E0611 {
