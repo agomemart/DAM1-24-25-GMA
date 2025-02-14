@@ -17,4 +17,14 @@ class Vagon {
         this(id, 10000, 0, "VARIADA");
 
     }
+
+    @Override
+    public String toString() {
+        return "Vagon{" +
+                "id=" + id +
+                ", cargaMaxima=" + cargaMaxima +
+                ", cargaActual=" + cargaActual +
+                ", tipoMercancia='" + tipoMercancia + '\'' +
+                '}';
+    }
 }

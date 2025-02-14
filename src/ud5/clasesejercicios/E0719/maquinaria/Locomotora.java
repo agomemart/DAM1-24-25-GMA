@@ -14,4 +14,8 @@ public class Locomotora {
         this.anhoFabricacion = anhoFabricacion;
         this.mecanico = mecanico;
     }
+
+    public String getMatricula() {
+        return matricula;
+    }
 }

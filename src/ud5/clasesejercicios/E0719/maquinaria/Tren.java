@@ -2,6 +2,8 @@ package ud5.clasesejercicios.E0719.maquinaria;
 
 import ud5.clasesejercicios.E0719.personal.Maquinista;
 
+import java.util.Arrays;
+
 public class Tren {
     static final byte MAX_VAGONES = 5;
     Locomotora locomotora;
@@ -22,5 +24,50 @@ public class Tren {
         for (int i = 0; i < numVagones; i++) {
             vagones[i] = new Vagon(i);
         }
+    }
+    public boolean addVagon(int id, int cargaMaxima, int cargaActual, String tipoMercancia) {
+        if (vagones.length == MAX_VAGONES) {
+            return false;
+        }
+        Vagon vagon = new Vagon(id, cargaMaxima, cargaActual, tipoMercancia);
+
+        vagones = Arrays.copyOf(vagones, vagones.length + 1);
+        vagones[vagones.length - 1] = vagon;
+
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        String str = "TREN\n";
+        str += maquinista + "\n";
+        str += locomotora + "\n";
+        for (Vagon vagon : vagones) {
+            str += "- " + vagon + "\n";
+        }
+
+        str += "\nCarga actual: " + getCargaActual();
+        str += "\nCarga máxima: " + getCargaMaxima();
+
+        return str;
+    }
+
+    public int getNumVagones() {
+        return vagones.length;
+    }
+
+    public int getCargaActual() {
+        int cargaActual = 0;
+        for (Vagon vagon : vagones) {
+            cargaActual += vagon.cargaActual;
+        }
+        return cargaActual;
+    }
+    public int getCargaMaxima() {
+        int cargaMaxima = 0;
+        for (Vagon vagon : vagones) {
+            cargaMaxima += vagon.cargaMaxima;
+        }
+        return cargaMaxima;
     }
 }

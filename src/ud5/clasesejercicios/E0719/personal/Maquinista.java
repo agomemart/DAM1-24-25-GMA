@@ -12,4 +12,14 @@ public class Maquinista {
         this.sueldo = sueldo;
         this.rango = rango;
     }
+
+    @Override
+    public String toString() {
+        return "Maquinista{" +
+                "nombre='" + nombre + '\'' +
+                ", dni='" + dni + '\'' +
+                ", sueldo=" + sueldo +
+                ", rango='" + rango + '\'' +
+                '}';
+    }
 }
