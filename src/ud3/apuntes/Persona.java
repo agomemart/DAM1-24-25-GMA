@@ -19,6 +19,14 @@ public class Persona {
         this.sexo = sexo;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
     //Métodos
     public void inicializar(String n, String a1, String a2, int e){                            
            nombre = n;

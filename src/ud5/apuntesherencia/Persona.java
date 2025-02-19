@@ -1,12 +1,14 @@
-package ud3.apuntes;
+package ud5.apuntesherencia;
+
+import ud3.apuntes.DiaDeLaSemana;
 
 public class Persona {
     //Datos 
-    private String nombre;
+    public String nombre;
     private String apellido1;
     private String apellido2;
-    private int edad;
-    private double estatura = 1.80;
+    public int edad;
+    public double estatura = 1.80;
     private final String dni = null;
     public static int contadorPersonas = 0;
     enum Sexo {HOMBRE, MUJER, NO_BINARIO};
@@ -33,6 +35,12 @@ public class Persona {
            apellido1 = a1;
            apellido2 = a2;
            edad = e;
+    }
+
+    public Persona(String nombre, int edad, double estatura) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.estatura = estatura;
     }
 
     public String nombreCompleto() {
