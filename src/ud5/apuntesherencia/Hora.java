@@ -1,36 +1,40 @@
 package ud5.apuntesherencia;
 
 public class Hora {
-    int hora;
-    int minutos;
+    byte hora;
+    byte minutos;
 
     public Hora(int hora, int minutos) {
-        this.hora = hora;
-        this.minutos = minutos;
-    }
-
-    public void inc() {
-        if (minutos == 59) {
-            hora++;
-            minutos = 0;
-        } else if (hora == 24){
-            hora = 0;
-        } else {
-            minutos++;
+        if (!setHora(hora)){
+            throw new IllegalArgumentException("La hora debe estar entre 0 y 23");
+        }
+        if (!setMinutos(minutos)){
+            throw new IllegalArgumentException("El minuto debe estar entre 0 y 59");
         }
     }
 
-    public boolean setMinutos(int minutos) {
-        if (minutos >= 0 && minutos < 60) {
-            this.minutos = minutos;
+    public void inc() {
+        minutos++;
+        if (minutos == 60) {
+            hora++;
+            minutos = 0;
+            if (hora == 24){
+                hora = 0;
+            }
+        }
+    }
+
+    boolean setMinutos(int valor) {
+        if (valor >= 0 && valor < 60) {
+           minutos = (byte)valor;
             return true;
         }
         return false;
     }
 
-    public boolean setHora(int hora) {
-        if (hora >= 0 && hora <= 23) {
-            this.hora = hora;
+    boolean setHora(int valor) {
+        if (valor >= 0 && valor < 24) {
+            hora = (byte)valor;
             return true;
         }
         return false;
@@ -38,10 +42,15 @@ public class Hora {
 
     @Override
     public String toString() {
-        return "Hora{" +
-                "hora=" + hora +
-                ", minutos=" + minutos +
-                '}';
+        return String.format("%02d:%02d", hora, minutos);
+    }
+
+    public static void main(String[] args) {
+        Hora hora = new Hora(8,10);
+        System.out.println(hora);
+        hora.inc();
+        System.out.println(hora);
+        hora.setMinutos(59);
     }
 
 }
