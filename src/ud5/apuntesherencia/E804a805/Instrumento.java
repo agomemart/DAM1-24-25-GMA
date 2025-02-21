@@ -39,5 +39,10 @@ abstract class Instrumento {
         Trompeta trompeta = new Trompeta();
         trompeta.copiarMelodia(piano);
         trompeta.interpretar();
+
+        Instrumento[] orquesta = {piano, guitarra, trompeta};
+        for (Instrumento instrumento : orquesta) {
+            instrumento.interpretar();
+        }
     }
 }
