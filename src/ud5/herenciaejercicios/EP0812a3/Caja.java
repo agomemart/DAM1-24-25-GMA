@@ -1,15 +1,20 @@
-package ud5.herenciaejercicios;
+package ud5.herenciaejercicios.EP0812a3;
 
 public class Caja {
     int ancho;
     int alto;
     int fondo;
+    enum Unidad {CM, M}
     String etiqueta;
 
-    public Caja(int ancho, int alto, int fondo) {
+
+    public Caja(int ancho, int alto, int fondo, Unidad unidad) {
         this.ancho = ancho;
         this.alto = alto;
         this.fondo = fondo;
+        Unidad u = Unidad.CM;
+        Unidad u2 = Unidad.M;
+
     }
 
     public double getVolumen() {
@@ -17,7 +22,9 @@ public class Caja {
     }
 
     public void setEtiqueta(String etiqueta) {
-        this.etiqueta = etiqueta;
+        if (etiqueta.length() <= 30) {
+            this.etiqueta = etiqueta;
+        }
     }
 
     @Override
