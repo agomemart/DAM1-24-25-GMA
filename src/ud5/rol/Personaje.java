@@ -11,17 +11,17 @@ class PersonajeNoValidoException extends Exception {
 enum Raza {HUMANO, ELFO, ENANO, HOBBIT, ORCO, TROLL;}
 
 public class Personaje {
-    private String nombre;
+    String nombre;
     private Raza raza;
     private int fuerza;
-    private int agilidad;
+    int agilidad;
     private int constitucion;
     private int inteligencia;
     private int intuicion;
     private int presencia;
     private int nivel;
     private int experiencia;
-    private int puntosVida;
+    int puntosVida;
 
     public Personaje(String nombre, Raza raza, int fuerza, int agilidad, int constitucion, int inteligencia, int intuicion, int presencia, int nivel, int experiencia) throws PersonajeNoValidoException {
         if (fuerza < 1 || agilidad < 1 || constitucion < 1 || inteligencia < 1 || intuicion < 1 || presencia < 1) {
@@ -82,6 +82,50 @@ public class Personaje {
         System.out.println("Nivel: " + nivel);
         System.out.println("Experiencia: " + experiencia);
         System.out.println("Puntos de Vida: " + puntosVida);
+    }
+
+    public byte sumarExperiencia(int puntos) {
+        experiencia += puntos;
+        byte nivelesSubidos = 0;
+        while (experiencia >= 1000) {
+            experiencia -= 1000;
+            subirNivel();
+            nivelesSubidos++;
+        }
+        return nivelesSubidos;
+    }
+
+    public void subirNivel() {
+        nivel++;
+        fuerza *= 1.05;
+        agilidad *= 1.05;
+        constitucion *= 1.05;
+        puntosVida = 50 + constitucion;
+    }
+
+    public void curar() {
+        puntosVida = Math.min(puntosVida, puntosVida);
+    }
+
+    public boolean perderVida(int puntos) {
+        puntosVida -= puntos;
+        return puntosVida <= 0;
+    }
+
+    public boolean estaVivo() {
+        return puntosVida > 0;
+    }
+
+    public int atacar(Personaje enemigo) {
+        Random rnd = new Random();
+        int ataque = fuerza + rnd.nextInt(100) + 1;
+        int defensa = enemigo.agilidad + rnd.nextInt(100) + 1;
+        int dano = Math.max(0, ataque - defensa);
+        dano = Math.min(dano, enemigo.puntosVida);
+        enemigo.perderVida(dano);
+        this.sumarExperiencia(dano);
+        enemigo.sumarExperiencia(dano);
+        return dano;
     }
 
     @Override

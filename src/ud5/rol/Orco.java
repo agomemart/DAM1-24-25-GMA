@@ -12,4 +12,6 @@ public class Orco extends Monstruo{
         puntosVida = rnd.nextInt(30, 100);
     }
 
+    public Orco() {
+    }
 }

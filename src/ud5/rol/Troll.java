@@ -11,4 +11,7 @@ public class Troll extends Monstruo{
         velocidad = rnd.nextInt(20, 40);
         puntosVida = rnd.nextInt(100, 200);
     }
+
+    public Troll() {
+    }
 }

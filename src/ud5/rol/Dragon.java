@@ -11,4 +11,7 @@ public class Dragon extends Monstruo{
         velocidad = rnd.nextInt(80, 120);
         puntosVida = rnd.nextInt(120, 250);
     }
+
+    public Dragon() {
+    }
 }

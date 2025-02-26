@@ -11,4 +11,7 @@ public class Aranha extends Monstruo{
         velocidad = rnd.nextInt(40, 70);
         puntosVida = rnd.nextInt(30, 80);
     }
+
+    public Aranha() {
+    }
 }
