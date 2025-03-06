@@ -1,4 +1,4 @@
-package ud5.apuntesinterfaces;
+package ud5.apuntesinterfaces.animales;
 
 public class Leon implements Sonido{
     @Override
