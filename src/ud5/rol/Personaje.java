@@ -23,19 +23,19 @@ public class Personaje {
     private int experiencia;
     int puntosVida;
 
-    public Personaje(String nombre, Raza raza, int fuerza, int agilidad, int constitucion, int inteligencia, int intuicion, int presencia, int nivel, int experiencia) throws PersonajeNoValidoException {
-        if (fuerza < 1 || agilidad < 1 || constitucion < 1 || inteligencia < 1 || intuicion < 1 || presencia < 1) {
-            throw new PersonajeNoValidoException("Las características deben ser mayores o iguales a 1.");
-        }
-        if (nivel < 1) {
-            throw new PersonajeNoValidoException("El nivel debe ser al menos 1.");
-        }
-        if (experiencia < 0) {
-            throw new PersonajeNoValidoException("La experiencia no puede ser negativa.");
-        }
-
-        this.nombre = nombre;
-        this.raza = raza;
+    public Personaje(String nombre, Raza raza2, int fuerza, int agilidad, int constitucion, int inteligencia, int intuicion, int presencia, int nivel, int experiencia) throws PersonajeNoValidoException {
+            if (fuerza < 1 || agilidad < 1 || constitucion < 1 || inteligencia < 1 || intuicion < 1 || presencia < 1) {
+                throw new PersonajeNoValidoException("Las características deben ser mayores o iguales a 1.");
+            }
+            if (nivel < 1) {
+                throw new PersonajeNoValidoException("El nivel debe ser al menos 1.");
+            }
+            if (experiencia < 0) {
+                throw new PersonajeNoValidoException("La experiencia no puede ser negativa.");
+            }
+    
+            this.nombre = nombre;
+            this.raza = raza2;
         this.fuerza = fuerza;
         this.agilidad = agilidad;
         this.constitucion = constitucion;
@@ -47,8 +47,8 @@ public class Personaje {
         this.puntosVida = 50 + constitucion;
     }
 
-    public Personaje(String nombre, Raza raza, int fuerza, int agilidad, int constitucion, int inteligencia, int intuicion, int presencia) throws PersonajeNoValidoException {
-        this(nombre, raza, fuerza, agilidad, constitucion, inteligencia, intuicion, presencia, 1, 0);
+    public Personaje(String nombre, Raza raza2, int fuerza, int agilidad, int constitucion, int inteligencia, int intuicion, int presencia) throws PersonajeNoValidoException {
+        this(nombre, raza2, fuerza, agilidad, constitucion, inteligencia, intuicion, presencia, 1, 0);
     }
 
     public Personaje(String nombre, Raza raza) {
@@ -131,6 +131,22 @@ public class Personaje {
     @Override
     public String toString() {
         return nombre + " (" + puntosVida + "/" + (50 + constitucion) + ")";
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getConstitucion() {
+        return constitucion;
+    }
+
+    public void setConstitucion(int constitucion) {
+        this.constitucion = constitucion;
     }
 }
 
