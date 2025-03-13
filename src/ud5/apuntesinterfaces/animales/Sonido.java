@@ -5,16 +5,17 @@ public interface Sonido {
     void voz();
 
     default void vozDurmiendo() {
-        for (int i = 0; i < 3; i++) {
+        for(int i = 0; i < 3; i++)
             dormir();
-        }
     }
 
     static void bostezo() {
-        System.out.println("Aauuuuuuu!");
+        System.out.println("Aauuuuuuu!!");
     }
 
     private void dormir() {
-        System.out.println("ZZZZzzz");
+        System.out.println("ZZZZZZzzzzzz");
+
     }
+
 }

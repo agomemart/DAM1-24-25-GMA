@@ -26,16 +26,19 @@ public class AppAnimal {
         s = gato;
         s.voz();
 
+        System.out.println("\nPOLIMORFISMO CON INTERFACES\n");
         Sonido[] sonidos = {perro, gato, leon};
         for (Sonido sonido : sonidos) {
-            System.out.println("Esto es un " + sonido.getClass().getSimpleName());
+            System.out.println("Esto es un ..." + sonido.getClass().getSimpleName());
             sonido.voz();
             sonido.vozDurmiendo();
         }
+
+        System.out.println("\nCLASES ANÓNIMAS\n");
         Sonido son = new Sonido() {
             @Override
             public void voz() {
-                System.out.println("Jajajjajajijijij");
+                System.out.println("Jajejijjoju");
             }
         };
 
@@ -44,3 +47,30 @@ public class AppAnimal {
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

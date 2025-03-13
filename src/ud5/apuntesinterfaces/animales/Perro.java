@@ -4,6 +4,7 @@ public class Perro implements Sonido{
     String nombre;
 
     public void voz() {
-        System.out.println("Guau, guau");
+        System.out.println("Guau, guau!!");
     }
+
 }

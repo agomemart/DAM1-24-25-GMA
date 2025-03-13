@@ -1,9 +1,5 @@
 package ud5.apuntesinterfaces.animales;
 
-public class Caracol implements Sonido {
+public class Caracol {
     String nombre;
-
-    public void voz() {
-
-    }
 }
