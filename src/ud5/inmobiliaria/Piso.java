@@ -17,4 +17,9 @@ public class Piso extends Inmueble{
         }
         return getClass() + " en " + direccion + ".\n" + m2 + " m2, " + numHabitaciones + " hab," + numBanhos + " baños," + planta + " planta.";
     }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        return 0;
+    }
 }

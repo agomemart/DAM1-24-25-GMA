@@ -8,7 +8,8 @@ public class Cientifica extends MullerTraballadora{
     }
 
     @Override
-    public String toString() {
-        return nombre + " " + apellidos + " " + descrContrib;
+    public String descrContrib() {
+        return nombre + " " + apellidos + " foi unha científica que descubriu: " + descubrimiento;
     }
+
 }

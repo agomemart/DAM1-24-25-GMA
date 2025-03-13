@@ -9,6 +9,11 @@ public class Politica extends MullerTraballadora{
     }
 
     @Override
+    public String descrContrib() {
+        return "";
+    }
+
+    @Override
     public String toString() {
         return nombre + " " + apellidos + " " + causa;
     }

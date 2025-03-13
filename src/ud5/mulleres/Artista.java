@@ -9,7 +9,7 @@ public class Artista extends MullerTraballadora{
     }
 
     @Override
-    public String toString() {
-        return nombre + " " + apellidos + " " + estilo;
+    public String descrContrib() {
+        return "";
     }
 }

@@ -30,5 +30,7 @@ public class Inmobiliaria {
         System.out.println(piso2.detalle());
         System.out.println("");
         System.out.println(casa2.detalle());
+
+        Inmueble[] t = {piso1, piso2, piso3, casa1, casa2};
     }
 }

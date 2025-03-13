@@ -7,6 +7,7 @@ public class Casa extends Inmueble{
         this.terreno = terreno;
     }
 
+    @Override
     String detalle() {
         if (precioAlquiler != 0) {
             return getClass() + " en " + direccion + ".\n" + m2 + " m2, " + numHabitaciones + " hab," + numBanhos + " baños, con terreno de " + terreno + " m2.\n" + "Precio de alquiler: " + precioAlquiler;
@@ -16,5 +17,10 @@ public class Casa extends Inmueble{
             return getClass() + " en " + direccion + ".\n" + m2 + " m2, " + numHabitaciones + " hab," + numBanhos + " baños, con terreno de " + terreno + " m2.\n" + "Precio de alquiler: " + precioAlquiler + "\nPrecio de venta: " + precioVenta;
         }
         return getClass() + " en " + direccion + "\n" + m2 + ", " + numHabitaciones + " hab," + numBanhos + " baños, con terreno de " + terreno + " m2.";
+    }
+
+    @Override
+    public int compare(Object o1, Object o2) {
+        return 0;
     }
 }

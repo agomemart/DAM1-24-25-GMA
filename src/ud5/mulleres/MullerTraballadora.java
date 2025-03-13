@@ -4,11 +4,6 @@ abstract class MullerTraballadora {
     String nombre;
     String apellidos;
     int anoNacimiento;
-    String descrContrib;
-
-    void descricionContribucion() {
-        System.out.println(descrContrib);
-    }
 
     int getEdad(int anoActual){
         return anoActual - anoNacimiento;
@@ -19,6 +14,8 @@ abstract class MullerTraballadora {
         this.apellidos = apellidos;
         this.anoNacimiento = anoNacimiento;
     }
+
+    public abstract String descrContrib();
 
     @Override
     public String toString() {
