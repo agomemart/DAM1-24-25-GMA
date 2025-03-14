@@ -1,5 +1,7 @@
 package ud5.inmobiliaria;
 
+import java.util.Arrays;
+
 public class Inmobiliaria {
 
     public static void main(String[] args) {
@@ -31,6 +33,25 @@ public class Inmobiliaria {
         System.out.println("");
         System.out.println(casa2.detalle());
 
-        Inmueble[] t = {piso1, piso2, piso3, casa1, casa2};
+        Inmueble[] inmuebles = {piso1, piso2, piso3, casa1, casa2};
+
+        System.out.println("TODOS LOS INMUEBLES:");
+        Inmueble.mostrarInmueble(inmuebles);
+
+        Arrays.sort(inmuebles);
+        System.out.println("INMUEBLES ORDENADOS ALFABÉTICAMENTE:");
+        Inmueble.mostrarInmueble(inmuebles);
+
+        Arrays.sort(inmuebles,new ComparaMetros());
+        System.out.println("INMUEBLES ORDENADOS POR m2 (ascendente):");
+        Inmueble.mostrarInmueble(inmuebles);
+
+        Inmueble.sortMetrosDesc(inmuebles);
+        System.out.println("INMUEBLES ORDENADOS POR m2 (descendente):");
+        Inmueble.mostrarInmueble(inmuebles);
+
+        Inmueble.sortPrecioAlquilerAsc(inmuebles);
+        System.out.println("INMUEBLES ORDENADOS POR PRECIO ALQUILER (ascendente):");
+        Inmueble.mostrarInmueble(inmuebles);
     }
 }

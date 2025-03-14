@@ -1,8 +1,10 @@
 package ud5.inmobiliaria;
 
+import javax.swing.*;
+import java.util.Arrays;
 import java.util.Comparator;
 
-abstract class Inmueble implements Comparator {
+public abstract class Inmueble implements Comparable {
     String direccion;
     int m2;
     int numHabitaciones;
@@ -29,36 +31,47 @@ abstract class Inmueble implements Comparator {
         return getClass() + " en " + direccion + " (" + m2 + " m2, " + numHabitaciones + "hab)";
     }
 
-    void mostrarInmueble(Inmueble[] t) {
-        for (int i = 0; i < t.length; i++) {
-            System.out.println(t[i].detalle());
+    static void mostrarInmueble(Inmueble[] t) {
+        for (Inmueble i : t) {
+            System.out.println(t);
         }
     }
-
-    public int ordenNatoralDireccion(Object o1, Object o2) {
-        System.out.println("INMUEBLES ORDENADOS ALFABÉTICAMENTE:");
-        Inmueble i1 = ((Inmueble) o1);
-        Inmueble i2 = ((Inmueble) o2);
-        return i1.direccion.compareToIgnoreCase(i2.direccion);
+    @Override
+    public int compareTo(Object o) {
+        return direccion.compareTo(((Inmueble) o).direccion);
     }
 
-    public int ordenM2Ascendente(Object o1, Object o2) {
-        System.out.println("INMUEBLES ORDENADOS POR m2 (ascendente):");
-        Inmueble i1 = ((Inmueble) o1);
-        Inmueble i2 = ((Inmueble) o2);
-        return 0;
+  //Metodos de ordenación
+    static void sortMetrosDesc(Inmueble[] t) {
+        Arrays.sort(t, new ComparaMetros().reversed());
     }
 
-    void sortMetrosDesc(Inmueble[] t) {
-
+    static void sortHabMetrosDesc(Inmueble[] t) {
+        Comparator comparaHab = new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Inmueble i1 = (Inmueble)  o1;
+                Inmueble i2 = (Inmueble)  o2;
+                int res = i2.numHabitaciones - i1.numHabitaciones;
+                if (res == 0) {
+                    res = i2.m2 - i1.m2;
+                }
+                return res;
+            }
+        };
+        Arrays.sort(t, comparaHab);
     }
 
-    void sortHabMetrosDesc(Inmueble[] t) {
-
-    }
-
-    void sortPrecioAlquilerAsc(Inmueble[] t) {
-
+    static void sortPrecioAlquilerAsc(Inmueble[] t) {
+        Comparator comparaAlq = new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Inmueble i1 = (Inmueble)  o1;
+                Inmueble i2 = (Inmueble)  o2;
+                return i1.numHabitaciones - i2.numHabitaciones;
+            }
+        };
+        Arrays.sort(t, comparaAlq);
     }
 
     void sortPrecioVentaAsc(Inmueble[] t) {
