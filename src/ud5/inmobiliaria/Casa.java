@@ -18,9 +18,4 @@ public class Casa extends Inmueble{
         }
         return getClass() + " en " + direccion + "\n" + m2 + ", " + numHabitaciones + " hab," + numBanhos + " baños, con terreno de " + terreno + " m2.";
     }
-
-    @Override
-    public int compare(Object o1, Object o2) {
-        return 0;
-    }
 }
