@@ -1,8 +1,9 @@
 package ud5.praiasdegalicia;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
-public class Praia implements Comparator {
+public class Praia implements Comparable {
     private int id;
     private String nome;
     private String concello;
@@ -87,15 +88,60 @@ public class Praia implements Comparator {
     }
 
     @Override
-    public int compare(Object o1, Object o2) {
+    public int compareTo(Object o) {
+        if (o instanceof Praia) {
+            Praia otraPraia = (Praia) o;
+            return Integer.compare(this.id, otraPraia.id); // Comparar por ID en lugar de nombre
+        }
         return 0;
     }
 
-    static void mostrarDetalles() {
+    public void mostrarDetalles() {
+        System.out.println("Detalles de la Playa:");
+        System.out.println("ID: " + id);
+        System.out.println("Nombre: " + nome);
+        System.out.println("Concello: " + concello);
+        System.out.println("Provincia: " + provincia);
+        System.out.println("Coordenadas: (" + lat + ", " + lon + ")");
+    }
 
+    public static Praia[] sortLatitudNorteSur(Praia[] p) {
+        Praia[] copia = Arrays.copyOf(p, p.length);
+        Arrays.sort(copia, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Praia a = (Praia) o1;
+                Praia b = (Praia) o2;
+                return Double.compare(b.getLat(), a.getLat()); // Mayor latitud primero
+            }
+        });
+        return copia;
+    }
+
+    public static Praia[] sortProvinciaConcelloNome(Praia[] p) {
+        Praia[] copia = Arrays.copyOf(p, p.length);
+        Arrays.sort(copia, new Comparator() {
+            @Override
+            public int compare(Object o1, Object o2) {
+                Praia a = (Praia) o1;
+                Praia b = (Praia) o2;
+
+                int cmp = a.getProvincia().compareTo(b.getProvincia());
+                if (cmp == 0) {
+                    cmp = a.getConcello().compareTo(b.getConcello());
+                }
+                if (cmp == 0) {
+                    cmp = a.getNome().compareTo(b.getNome());
+                }
+                return cmp;
+            }
+        });
+        return copia;
     }
 
     static void imprimirLista(Praia[] praias, int pos) {
-
+        for (int i = 0; i < pos; i++) {
+            System.out.println(praias[i].toString());
+        }
     }
 }
