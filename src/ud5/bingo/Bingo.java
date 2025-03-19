@@ -5,7 +5,11 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Bingo {
-    static int MAX_NUM= 99;
+    static int MAX_NUM = 99;
+    static Jugador[] jugadores;
+    static int[] numeros = new int[0];
+    static boolean linea = false;
+    static boolean bingo = false;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -26,7 +30,7 @@ public class Bingo {
             System.out.println();
 
             Jugador jugador = new Jugador(nombre, numCartones);
-            //jugadores[i + 1];
+            //jugadores[i - 1];
             System.out.println(jugador);
         }
 
@@ -35,6 +39,37 @@ public class Bingo {
 
         System.out.println("Que modalidad prefieres? N o ");
         String opcion = sc.nextLine().toUpperCase();
+    }
+
+    private static void modoAutomatico() {
+        throw new UnsupportedOperationException("Unimplemented method");
+    }
+
+    private static void modoNumeroANumero() {
+        int numero = sortearNumero();
+        System.out.println("Número que sale del bombo: " + numero);
+
+    }
+
+    private static int sortearNumero() {
+        Random rnd = new Random();
+        int numRandom;
+        boolean repetido;
+        do {
+            numRandom = rnd.nextInt(MAX_NUM) + 1;
+            repetido = false;
+            int i = 0;
+            while (i < numeros.length && !repetido) {
+                if (numeros[i] == numRandom)
+                    repetido = true;
+                i++;
+            }
+        } while (repetido);
+
+        numeros = Arrays.copyOf(numeros, numeros.length + 1);
+        numeros[numeros.length - 1] = numRandom;
+
+        return numRandom;
     }
 }
 class Jugador {
@@ -67,9 +102,49 @@ class Carton {
         for (int i = 0; i < MAX_FILAS; i++) {
             for (int j = 0; j < MAX_COL; j++) {
                 Random rnd = new Random();
-                //Falata comprobar que el num no está repetido
-                numeros[i][j] = rnd.nextInt(Bingo.MAX_NUM) + 1;
+                boolean repetido = false;
+                int numRandom;
+                do {
+                    numRandom = rnd.nextInt(Bingo.MAX_NUM) + 1;
+                    int ii = 0;
+                    while (ii <= i && !repetido) {
+                        int jj = 0;
+                        while (jj <= MAX_COL && !repetido) {
+                            if (numeros[ii][jj] == numRandom)
+                                repetido = true;
+                            jj++;
+                        }
+                        ii++;
+                    }
+                } while(repetido);
+                numeros[i][j] = numRandom;
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < MAX_FILAS; i++) {
+            for (int j = 0; j < MAX_COL; j++) {
+                str.append(numeros[i][j] + " ");
+            }
+            str.append("\n");
+        }
+        return str.toString();
+    }
+    public int revisarCarton(int[] numerosSorteo) {
+        Arrays.sort(numerosSorteo);
+        Arrays.sort(numeros);
+        for (int i = 0; i < MAX_FILAS; i++) {
+            for (int j = 0; j < MAX_COL; j++) {
+                if (numeros[i][0] == numerosSorteo[i] || numeros[i][1] == numerosSorteo[i] || numeros[i][2] == numerosSorteo[i]) {
+                    return 1;
+                } else if (numeros[i][0] == numerosSorteo[i] && numeros[i][1] == numerosSorteo[i] && numeros[i][2] == numerosSorteo[i]) {
+                    return 2;
+                }
+            }
+        }
+        return 0;
     }
 }
