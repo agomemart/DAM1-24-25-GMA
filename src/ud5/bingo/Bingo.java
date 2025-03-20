@@ -1,13 +1,11 @@
 package ud5.bingo;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Bingo {
-    static int MAX_NUM = 99;
+    static final int MAX_NUM = 99;
     static Jugador[] jugadores;
-    static int[] numeros = new int[0];
+    static int[] numerosSorteados = new int[0];
     static boolean linea = false;
     static boolean bingo = false;
 
@@ -18,60 +16,94 @@ public class Bingo {
 
         System.out.print("Número de jugadores: ");
         int numJugadores = sc.nextInt();
+        sc.nextLine(); // Limpieza del buffer
 
+        jugadores = new Jugador[numJugadores];
         System.out.println("Introduce los datos de los jugadores:");
 
-        for (int i = 0; i <= numJugadores; i++) {
-            sc.nextLine(); //Limpieza del buffer
+        for (int i = 0; i < numJugadores; i++) {
             System.out.print("Nombre: ");
             String nombre = sc.nextLine();
             System.out.print("Número de cartones: ");
             int numCartones = sc.nextInt();
-            System.out.println();
+            sc.nextLine(); // Limpieza del buffer
 
-            Jugador jugador = new Jugador(nombre, numCartones);
-            //jugadores[i - 1];
-            System.out.println(jugador);
+            jugadores[i] = new Jugador(nombre, numCartones);
+            System.out.println(jugadores[i]);
         }
 
         System.out.println("Comienza el juego");
         System.out.println("-------------------");
 
-        System.out.println("Que modalidad prefieres? N o ");
+        System.out.println("¿Qué modalidad prefieres? (A = Automático / M = Manual): ");
         String opcion = sc.nextLine().toUpperCase();
+
+        if (opcion.equals("A")) {
+            modoAutomatico();
+        } else {
+            modoNumeroANumero(sc);
+        }
+
+        sc.close();
     }
 
     private static void modoAutomatico() {
-        throw new UnsupportedOperationException("Unimplemented method");
+        System.out.println("Modo automático activado");
+        while (!bingo) {
+            sortearNumero();
+            verificarCartones();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    private static void modoNumeroANumero() {
-        int numero = sortearNumero();
-        System.out.println("Número que sale del bombo: " + numero);
-
+    private static void modoNumeroANumero(Scanner sc) {
+        while (!bingo) {
+            System.out.println("Presiona ENTER para sortear un número...");
+            sc.nextLine();
+            sortearNumero();
+            verificarCartones();
+        }
     }
 
-    private static int sortearNumero() {
+    private static void sortearNumero() {
         Random rnd = new Random();
         int numRandom;
         boolean repetido;
         do {
             numRandom = rnd.nextInt(MAX_NUM) + 1;
             repetido = false;
-            int i = 0;
-            while (i < numeros.length && !repetido) {
-                if (numeros[i] == numRandom)
+            for (int num : numerosSorteados) {
+                if (num == numRandom) {
                     repetido = true;
-                i++;
+                    break;
+                }
             }
         } while (repetido);
 
-        numeros = Arrays.copyOf(numeros, numeros.length + 1);
-        numeros[numeros.length - 1] = numRandom;
+        numerosSorteados = Arrays.copyOf(numerosSorteados, numerosSorteados.length + 1);
+        numerosSorteados[numerosSorteados.length - 1] = numRandom;
+        System.out.println("Número que sale del bombo: " + numRandom);
+    }
 
-        return numRandom;
+    private static void verificarCartones() {
+        for (Jugador jugador : jugadores) {
+            if (jugador.verificarLinea(numerosSorteados) && !linea) {
+                System.out.println("¡" + jugador.nombre + " ha cantado línea!");
+                linea = true;
+            }
+            if (jugador.verificarBingo(numerosSorteados)) {
+                System.out.println("¡" + jugador.nombre + " ha ganado el BINGO!");
+                bingo = true;
+                break;
+            }
+        }
     }
 }
+
 class Jugador {
     String nombre;
     Carton[] cartones;
@@ -84,67 +116,88 @@ class Jugador {
         }
     }
 
+    public boolean verificarLinea(int[] numerosSorteados) {
+        for (Carton carton : cartones) {
+            if (carton.tieneLinea(numerosSorteados)) return true;
+        }
+        return false;
+    }
+
+    public boolean verificarBingo(int[] numerosSorteados) {
+        for (Carton carton : cartones) {
+            if (carton.tieneBingo(numerosSorteados)) return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
-        return "Jugador: " + nombre + ", Número de cartones: " + cartones.length + 1;
+        return "Jugador: " + nombre + ", Número de cartones: " + cartones.length;
     }
 }
 
 class Carton {
-    static final int MAX_FILAS=3;
-    static final int MAX_COL= 5;
+    static final int MAX_FILAS = 3;
+    static final int MAX_COL = 5;
 
     int[][] numeros;
 
     public Carton() {
-        this.numeros = new int [MAX_FILAS][MAX_COL];
+        this.numeros = new int[MAX_FILAS][MAX_COL];
+        int[] generados = new int[MAX_FILAS * MAX_COL];
+        int count = 0;
+        Random rnd = new Random();
 
         for (int i = 0; i < MAX_FILAS; i++) {
             for (int j = 0; j < MAX_COL; j++) {
-                Random rnd = new Random();
-                boolean repetido = false;
                 int numRandom;
+                boolean repetido;
                 do {
                     numRandom = rnd.nextInt(Bingo.MAX_NUM) + 1;
-                    int ii = 0;
-                    while (ii <= i && !repetido) {
-                        int jj = 0;
-                        while (jj <= MAX_COL && !repetido) {
-                            if (numeros[ii][jj] == numRandom)
-                                repetido = true;
-                            jj++;
+                    repetido = false;
+                    for (int k = 0; k < count; k++) {
+                        if (generados[k] == numRandom) {
+                            repetido = true;
+                            break;
                         }
-                        ii++;
                     }
-                } while(repetido);
+                } while (repetido);
+
+                generados[count++] = numRandom;
                 numeros[i][j] = numRandom;
             }
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
+    public boolean tieneLinea(int[] numerosSorteados) {
         for (int i = 0; i < MAX_FILAS; i++) {
+            boolean completa = true;
             for (int j = 0; j < MAX_COL; j++) {
-                str.append(numeros[i][j] + " ");
+                if (!contiene(numerosSorteados, numeros[i][j])) {
+                    completa = false;
+                    break;
+                }
             }
-            str.append("\n");
+            if (completa) return true;
         }
-        return str.toString();
+        return false;
     }
-    public int revisarCarton(int[] numerosSorteo) {
-        Arrays.sort(numerosSorteo);
-        Arrays.sort(numeros);
+
+    public boolean tieneBingo(int[] numerosSorteados) {
         for (int i = 0; i < MAX_FILAS; i++) {
             for (int j = 0; j < MAX_COL; j++) {
-                if (numeros[i][0] == numerosSorteo[i] || numeros[i][1] == numerosSorteo[i] || numeros[i][2] == numerosSorteo[i]) {
-                    return 1;
-                } else if (numeros[i][0] == numerosSorteo[i] && numeros[i][1] == numerosSorteo[i] && numeros[i][2] == numerosSorteo[i]) {
-                    return 2;
+                if (!contiene(numerosSorteados, numeros[i][j])) {
+                    return false;
                 }
             }
         }
-        return 0;
+        return true;
+    }
+
+    private boolean contiene(int[] array, int num) {
+        for (int i : array) {
+            if (i == num) return true;
+        }
+        return false;
     }
 }
