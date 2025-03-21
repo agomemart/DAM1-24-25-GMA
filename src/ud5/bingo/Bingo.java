@@ -46,9 +46,14 @@ public class Bingo {
     }
 
     private static void modoNumeroANumero() {
-        int numero = sortearNumero();
-        System.out.println("Número que sale del bombo: " + numero);
-
+        do {
+            int numero = sortearNumero();
+            System.out.println("Número que sale del bombo: " + numero);
+            System.out.println("númeors sorteados: " + Arrays.toString(numeros));
+            Carton.revisarCartonesJugadores();
+            System.out.println("Pulsa ENTER para continuar");
+            new Scanner(System.in).nextLine();
+        } while (!bingo);
     }
 
     private static int sortearNumero() {
@@ -94,7 +99,7 @@ class Carton {
     static final int MAX_FILAS=3;
     static final int MAX_COL= 5;
 
-    int[][] numeros;
+    static int[][] numeros;
 
     public Carton() {
         this.numeros = new int [MAX_FILAS][MAX_COL];
@@ -133,18 +138,44 @@ class Carton {
         }
         return str.toString();
     }
-    public int revisarCarton(int[] numerosSorteo) {
+    public int revisarCarton(int[][] numerosSorteo) {
         Arrays.sort(numerosSorteo);
         Arrays.sort(numeros);
         for (int i = 0; i < MAX_FILAS; i++) {
             for (int j = 0; j < MAX_COL; j++) {
-                if (numeros[i][0] == numerosSorteo[i] || numeros[i][1] == numerosSorteo[i] || numeros[i][2] == numerosSorteo[i]) {
+               /* if (numeros[i][0] == numerosSorteo[i] || numeros[i][1] == numerosSorteo[i] || numeros[i][2] == numerosSorteo[i]) {
                     return 1;
                 } else if (numeros[i][0] == numerosSorteo[i] && numeros[i][1] == numerosSorteo[i] && numeros[i][2] == numerosSorteo[i]) {
                     return 2;
-                }
+                }*/
             }
         }
         return 0;
+    }
+    static void revisarCartonesJugadores() {
+        boolean nuevaLinea = false;
+        boolean nuevoBingo = false;
+        for (Jugador jugador : Bingo.jugadores) {
+            for (Carton carton : jugador.cartones) {
+                switch (carton.revisarCarton(numeros)) {
+                    case 0: break;
+                    case 1:
+                        if (!Bingo.linea) {
+                            System.out.println(jugador.nombre + " canta línea");
+                            System.out.println(carton);
+                            nuevaLinea = true;
+                        }
+                        break;
+                    case 2:
+                        if (!Bingo.bingo) {
+                            System.out.println(jugador.nombre + " canta bingo");
+                            System.out.println(carton);
+                            nuevoBingo = true;
+                        }
+                }
+            }
+        }
+        if (nuevaLinea)
+            Bingo.linea = true;
     }
 }
