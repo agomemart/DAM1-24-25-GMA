@@ -1,5 +1,6 @@
 package ud4.practicaexamen;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class EliminarDuplicados {
@@ -11,19 +12,35 @@ public class EliminarDuplicados {
             array[i] = rnd.nextInt(99);
         }
 
-        int[] array2 = new int[10];
-        int j = 0;
-        for (int i = 0; i < array.length - 1; i++) {
-            if (array[i] != array[i + 1]) {
-                array2[j++] = array[i];
+        System.out.println("Array generado aleatoriamente con repetidos: " + Arrays.toString(array));
+        System.out.println("Array sin repetidos: " + Arrays.toString(eliminarDuplicados(array)));
+
+    }
+    public static int[] eliminarDuplicados(int[] array) {
+        int[] temp = new int[array.length]; // Array temporal para almacenar valores únicos
+        int contador = 0;
+
+        for (int i = 0; i < array.length; i++) {
+            boolean encontrado = false;
+
+            for (int j = 0; j < contador; j++) {
+                if (array[i] == temp[j]) {
+                    encontrado = true;
+                    break;
+                }
+            }
+
+            if (!encontrado) {
+                temp[contador] = array[i];
+                contador++;
             }
         }
-        array2[j++] = array[array.length - 1];
 
-        int[] resultado = new int[j];
-        for (int i = 0; i < j; i++) {
-            resultado[i] = array2[i];
+        int[] resultado = new int[contador];
+        for (int i = 0; i < contador; i++) {
+            resultado[i] = temp[i];
         }
-        System.out.println(resultado);
+
+        return resultado;
     }
 }
