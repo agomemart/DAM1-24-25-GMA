@@ -21,7 +21,7 @@ class MathUtilsTest {
     void factorialNoBucle() {assertEquals(1, MathUtils.factorial(0));}
 
     @Test
-    void factorialBucle() {assertEquals(1, MathUtils.factorial(1));}
+    void factorialBucle() {assertEquals(2, MathUtils.factorial(2));}
 
     @ParameterizedTest
     @CsvSource({
