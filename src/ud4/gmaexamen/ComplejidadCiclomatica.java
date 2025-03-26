@@ -1,27 +1,20 @@
-//Adrián Gómez Nartínez
 package ud4.gmaexamen;
 
-public class ComplejidadCiclomática {
+public class ComplejidadCiclomatica {
     static int complejidadCiclomatica(int[][] grafo) {
-        int region = 0;
-        if (grafo == null || grafo.length == 0) {
-            return -1;
+        int complCiclo = 1;
+        if (grafo.length == 0 || grafo[0].length == 0) {
+            return 0;
         }
-
         for (int i = 0; i < grafo.length; i++) {
-            if (grafo[i].length != 0) {
-                if (i + 1 >= grafo.length || i - 1 <= 0){
-                    if (grafo[i].length == 1 || grafo[i + 1].length > 1) {
-                        region++;
-                    } else if (grafo[i].length > 1 || grafo[i - 1].length < 1){
-                        region++;
-                    }
+            for (int j = 0; j < grafo[i].length; j++) {
+                if (grafo[i].length >= 2) {
+                    complCiclo ++;
+                    break;
                 }
-
             }
         }
-
-        return region;
+        return complCiclo;
     }
 
     public static void main(String[] args) {
@@ -43,7 +36,9 @@ public class ComplejidadCiclomática {
                 {0},
                 {}
         };
+
         System.out.println(complejidadCiclomatica(grafo1));
         System.out.println(complejidadCiclomatica(grafo2));
     }
+
 }
