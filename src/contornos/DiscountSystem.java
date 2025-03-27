@@ -1,3 +1,5 @@
+//Adrián Gómez Martínez
+
 package contornos;
 
 public class DiscountSystem {
@@ -15,7 +17,7 @@ public class DiscountSystem {
         }
 
         if (isLoyalCustomer && amount >= 200) {
-            discount -= 0.05;
+            discount += 0.05; //Aquí debería de ser += porque si no se está restando el descuento adiccional en vez de sumárselo
         }
 
         double finalAmount = amount - (amount * discount);
