@@ -1,6 +1,7 @@
 package ud6;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 //E1202
 public class ContenedorLista<T> {
@@ -26,7 +27,19 @@ public class ContenedorLista<T> {
         return null;
     }
     void ordenar() {
+        Arrays.sort(objetos);
+    }
 
+    T get (int indice) {
+        return objetos[indice];
+    }
+
+    T extract (int indice) {
+        return null;
+    }
+
+    void ordenar (Comparator<T> c) {
+        Arrays.sort(objetos, c);
     }
 
     @Override
