@@ -1,20 +1,34 @@
 package ud6;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Sorteo<T> {
+
+    Set<T> elementos;
+
+    public Sorteo() {
+        elementos = new HashSet<>();
+    }
+
     boolean add (T elemento) {
-        Set<T> elementos = null;
-        if (elementos.add(elemento)) {
-            return true;
-        }
-        return false;
+        return elementos.add(elemento);
     }
 
     Set<T> premiados (int numPremiados) {
-        Set<T> premiados = null;
+        if (numPremiados <= 0)
+            return null;
+        if (numPremiados > elementos.size())
+            numPremiados = elementos.size();
 
-        return null;
+        Set<T> premiados = new HashSet<>();
+
+        List<T> lista = new ArrayList<>(elementos);
+        Collections.shuffle(lista);
+
+        for (int i = 0; i < numPremiados; i++) {
+            premiados.add(lista.get(i));
+        }
+
+        return premiados;
     }
 }
