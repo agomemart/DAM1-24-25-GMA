@@ -1,5 +1,7 @@
 package ud6;
 
+import java.util.Objects;
+
 public class Producto {
         String codigo;
         String nombre;
@@ -11,9 +13,12 @@ public class Producto {
 
         @Override
         public String toString() {
-            return "Producto{" +
-                    "codigo='" + codigo + '\'' +
-                    ", nombre='" + nombre + '\'' +
-                    '}';
+            return codigo + "-" + nombre;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof Producto producto)) return false;
+            return Objects.equals(codigo, producto.codigo) && Objects.equals(nombre, producto.nombre);
         }
 }
