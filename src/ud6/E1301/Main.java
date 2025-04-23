@@ -42,7 +42,11 @@ public class Main {
     }
 
     static <T> T max(T[] t, Comparator<T> c) {
-        Arrays.sort(t, c);
-        return t[t.length -1];
+        if (t == null || t.length == 0){
+            return null;
+        }
+
+        Arrays.sort(t, c.reversed());
+        return t[0];
     }
 }
