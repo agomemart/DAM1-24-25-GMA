@@ -8,8 +8,6 @@ class PersonajeNoValidoException extends Exception {
     }
 }
 
-enum Raza {HUMANO, ELFO, ENANO, HOBBIT, ORCO, TROLL;}
-
 public class Personaje {
     String nombre;
     private Raza raza;

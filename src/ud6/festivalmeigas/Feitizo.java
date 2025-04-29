@@ -1,15 +1,19 @@
 package ud6.festivalmeigas;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Feitizo {
     private String nome;
-    private List<String> ingredientes;
+    Set<String> ingredientes;
     private Integer dificultade;
 
     public Feitizo(String nome, String[] ingredientes, Integer dificultade) {
         this.nome = nome;
-        this.ingredientes = Arrays.asList(ingredientes);
+        this.ingredientes = new HashSet<>(Arrays.asList(ingredientes));
+        if (dificultade < 1 || dificultade > 5) {
+            throw new IllegalArgumentException("Dificultad debe estar entre 1-5");
+        }
         this.dificultade = dificultade;
     }
 
@@ -65,22 +69,41 @@ public class Feitizo {
     }
 
     public static Map<String, Integer> ingredientesVecesUsados(Collection<Feitizo> feitizos) {
-        return null;
+        Map<String, Integer> contador = new HashMap<>();
+        for (Feitizo f : feitizos) {
+            for (String ing : f.ingredientes) {
+                contador.put(ing, contador.getOrDefault(ing, 0) + 1);
+            }
+        }
+        return contador;
     }
 
-    public static List<Feitizo> feitizosUsanIngrediente(String ingrediente) {
-        return null;
+    public static List<Feitizo> feitizosUsanIngrediente(Collection<Feitizo> feitizos, String ingrediente) {
+        return feitizos.stream()
+                .filter(f -> f.ingredientes.contains(ingrediente))
+                .collect(Collectors.toList());
     }
 
     public boolean cambiarIngrediente(String ingredienteViejo, String ingredienteNuevo) {
-        return true;
+        if (ingredientes.remove(ingredienteViejo)) {
+            return ingredientes.add(ingredienteNuevo);
+        }
+        return false;
     }
 
     public boolean removeIngrediente(String ingrediente) {
-        return true;
+        return ingredientes.remove(ingrediente);
     }
 
-    public boolean addIngrediente (String ingrediente) {
-        return true;
+    public boolean addIngrediente(String ingrediente) {
+        return ingredientes.add(ingrediente);
+    }
+
+    public static List<String> top3Ingredientes(Collection<Feitizo> feitizos) {
+        return ingredientesVecesUsados(feitizos).entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .limit(3)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toList());
     }
 }

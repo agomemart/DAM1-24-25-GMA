@@ -11,6 +11,11 @@ public class Persona {
     public double estatura = 1.80;
     private final String dni = null;
     public static int contadorPersonas = 0;
+
+    public Persona(String juancho) {
+        this.nombre = juancho;
+    }
+
     enum Sexo {HOMBRE, MUJER, NO_BINARIO};
     private Sexo sexo;
     DiaDeLaSemana diaPreferido;
