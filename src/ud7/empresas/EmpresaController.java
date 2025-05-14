@@ -8,15 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class EmpresaController implements Initializable {
 
     @FXML
-    private ListView<?> lstEmpresas;
+    private ListView<Empresa> lstEmpresas;
 
     @FXML
     private TextField txtId;
@@ -29,13 +25,14 @@ public class EmpresaController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*lstEmpresas.getItems().addAll(AppEmpresa.empresas);
-        lstEmpresas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            System.out.println(newSelection);
-            txtId.setText(String.valueOf(newSelection.getId()));
-            txtId.setText(newSelection.getNombre());
-            txtId.setText(newSelection.getWeb());
-        });*/
+        lstEmpresas.getItems().addAll(AppEmpresa.empresas);
+
+        lstEmpresas.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldSelection, empresaSeleccionada) -> {
+                    txtId.setText(String.valueOf(empresaSeleccionada.getId()));
+                    txtNombre.setText(empresaSeleccionada.getNombre());
+                    txtWeb.setText(empresaSeleccionada.getWeb());
+                });
     }
 
     @FXML
@@ -47,21 +44,20 @@ public class EmpresaController implements Initializable {
             e.setNombre(txtNombre.getText());
             e.setWeb(txtWeb.getText());
 
+            // TODO Actualizar listview más quirúrgicamente
             lstEmpresas.getItems().clear();
-            //lstEmpresas.getItems().addAll(AppEmpresa.empresas);
-            System.out.println("Elemento actualizado");
+            lstEmpresas.getItems().addAll(AppEmpresa.empresas);
         }
     }
 
     @FXML
     void agregar(ActionEvent event) {
-        Empresa empresa = new Empresa (Integer.parseInt(txtId.getText()), txtNombre.getText(), txtWeb.getText());
+        Empresa empresa = new Empresa(Integer.parseInt(txtId.getText()), txtNombre.getText(), txtWeb.getText());
 
         if (!AppEmpresa.empresas.contains(empresa)) {
             AppEmpresa.empresas.add(empresa);
-            //lstEmpresas.getItems().add(empresa);
+            lstEmpresas.getItems().add(empresa);
         }
-
     }
 
     @FXML
@@ -70,11 +66,5 @@ public class EmpresaController implements Initializable {
         AppEmpresa.empresas.remove(new Empresa(id));
         lstEmpresas.getItems().remove(new Empresa(id));
     }
-
-    @FXML
-    void obtenerItem(MouseEvent event) {
-
-    }
-
 
 }

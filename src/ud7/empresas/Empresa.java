@@ -1,7 +1,5 @@
 package ud7.empresas;
 
-import java.util.Objects;
-
 public class Empresa {
     private int id;
     private String nombre;
@@ -13,47 +11,60 @@ public class Empresa {
         this.web = web;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setWeb(String web) {
-        this.web = web;
-    }
-
-    public String getWeb() {
-        return web;
-    }
-
     public Empresa(int id) {
         this.id = id;
     }
 
     @Override
     public String toString() {
-        return id + " - " + nombre + " ('" + web + ")";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (!(o instanceof Empresa empresa)) return false;
-        return id == empresa.id && Objects.equals(nombre, empresa.nombre) && Objects.equals(web, empresa.web);
+        // return id + " - " + nombre + " (" + web + ")";
+        return id + " - " + nombre;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, web);
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + id;
+        return result;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Empresa other = (Empresa) obj;
+        if (id != other.id)
+            return false;
+        return true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getWeb() {
+        return web;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
+    }
+
 }
