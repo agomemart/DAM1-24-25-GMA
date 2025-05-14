@@ -1,4 +1,4 @@
-package ud7;
+package ud7.login;
 
 public class Usuario {
     private String username;
