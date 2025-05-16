@@ -45,9 +45,13 @@ public class EmpresaController implements Initializable {
             e.setWeb(txtWeb.getText());
 
             // TODO Actualizar listview más quirúrgicamente
-            lstEmpresas.getItems().clear();
-            lstEmpresas.getItems().addAll(AppEmpresa.empresas);
+            actualizarListView();
         }
+    }
+
+    private void actualizarListView() {
+        lstEmpresas.getItems().clear();
+        lstEmpresas.getItems().addAll(AppEmpresa.empresas);
     }
 
     @FXML
@@ -65,6 +69,18 @@ public class EmpresaController implements Initializable {
         int id = Integer.parseInt(txtId.getText());
         AppEmpresa.empresas.remove(new Empresa(id));
         lstEmpresas.getItems().remove(new Empresa(id));
+    }
+
+    @FXML
+    void guardarFicheroTexto(ActionEvent event) {
+
+        AppEmpresa.guardarFichero(AppEmpresa.path + "empresas.csv");
+    }
+
+    @FXML
+    void cargarFichero (ActionEvent event) {
+        AppEmpresa.cargarFichero(AppEmpresa.path + "empresas.csv");
+        actualizarListView();
     }
 
 }
