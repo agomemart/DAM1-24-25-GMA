@@ -67,7 +67,7 @@ public class Mapa extends Application {
 
                     break;
                 case "d" :
-                    
+
                     break;
             }
 
