@@ -7,7 +7,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ud7.pruebafx.Vista1">
    <children>
       <Label layoutX="57.0" layoutY="53.0" text="Nombre" />
@@ -15,10 +14,10 @@
       <ListView id="vistaLista" layoutX="355.0" layoutY="49.0" prefHeight="313.0" prefWidth="222.0" />
       <TextField id="nombre" layoutX="119.0" layoutY="49.0" />
       <TextField id="apellidos" layoutX="119.0" layoutY="85.0" />
+      <DatePicker layoutX="165.0" layoutY="128.0" />
       <Button id="botonActualizar" layoutX="54.0" layoutY="332.0" mnemonicParsing="false" onAction="#actualizar" text="Actualizar" />
       <Button id="botonGuardar" layoutX="136.0" layoutY="332.0" mnemonicParsing="false" onAction="#guardar" text="Guardar" />
       <Button id="botonEliminar" layoutX="209.0" layoutY="332.0" mnemonicParsing="false" onAction="#eliminar" text="Eliminar" />
-      <DatePicker layoutX="165.0" layoutY="128.0" />
       <Label layoutX="54.0" layoutY="132.0" text="Fecha Nacimiento" />
    </children>
 </AnchorPane>

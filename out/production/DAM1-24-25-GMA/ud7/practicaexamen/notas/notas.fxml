@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ud7.practicaexamen.notas.NotasController"
+      spacing="10" alignment="TOP_CENTER" style="-fx-padding: 15;">
+
+    <Button text="Calcular Promedios" onAction="#calcularPromedios"/>
+    <TextArea fx:id="resultadoArea" prefHeight="300" wrapText="true"/>
+</VBox>

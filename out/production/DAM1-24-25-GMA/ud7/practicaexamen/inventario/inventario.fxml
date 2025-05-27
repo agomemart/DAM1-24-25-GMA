@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="ud7.practicaexamen.inventario.InventarioController"
+      spacing="10" alignment="TOP_CENTER" style="-fx-padding: 15;">
+
+    <GridPane hgap="10" vgap="10">
+        <columnConstraints>
+            <ColumnConstraints halignment="RIGHT"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints valignment="CENTER"/>
+        </rowConstraints>
+        <Label text="Código:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="codigoField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <TextField fx:id="nombreField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Cantidad:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="cantidadField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Precio:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="precioField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <Button text="Agregar Producto" onAction="#agregarProducto"/>
+    <Button text="Listar Productos" onAction="#listarProductos"/>
+
+    <HBox spacing="10">
+        <TextField fx:id="buscarField" promptText="Código a buscar"/>
+        <Button text="Buscar" onAction="#buscarProducto"/>
+    </HBox>
+
+    <TextArea fx:id="resultadoArea" prefHeight="250" wrapText="true"/>
+</VBox>
+
