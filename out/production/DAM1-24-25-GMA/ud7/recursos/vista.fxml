@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="ud7.recursos.VistaController">
+<children>
+    <Label layoutX="20" layoutY="20" text="¡Hola JavaFX!" />
+    <Button layoutX="20" layoutY="60" text="Haz clic" onAction="#onBotonClic" />
+</children>
+</AnchorPane>
