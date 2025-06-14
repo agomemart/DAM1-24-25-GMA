@@ -21,7 +21,6 @@ public class Biblioteca {
         Scanner sc = new Scanner(System.in);
         int opcion;
 
-        mostrarMenu();
         do {
             mostrarMenu();
             System.out.print("Elige una opción: ");
@@ -77,7 +76,7 @@ public class Biblioteca {
                     }
                     break;
                 case 5:
-                    System.out.println("Autor: ");
+                    System.out.print("Autor: ");
                     String autorLibros = sc.nextLine();
                     boolean encontradoAutor = false;
 

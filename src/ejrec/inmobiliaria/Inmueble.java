@@ -1,7 +1,5 @@
 package ejrec.inmobiliaria;
 
-import java.util.Comparator;
-
 public abstract class Inmueble implements Comparable<Inmueble> {
     private String direccion;
     private double metros;
